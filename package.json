@@ -11,12 +11,18 @@
     "@types/node": "^16.18.23",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+    "classnames": "^2.3.2",
     "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0",
     "react-scripts": "^5.0.1",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@mate-academy/eslint-config-react-typescript": "^1.0.11",
+    "eslint": "^7.32.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "@mate-academy/students-ts-config": "*"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -24,13 +30,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "browserslist": {
     "production": [
@@ -45,11 +48,10 @@
     ]
   },
   "devDependencies": {
-    "@mate-academy/eslint-config-react-typescript": "*",
-    "@typescript-eslint/eslint-plugin": "^5.58.0",
-    "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",
-    "eslint-plugin-react": "^7.32.2",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.7",
     "sass": "^1.61.0"
   }
 }
