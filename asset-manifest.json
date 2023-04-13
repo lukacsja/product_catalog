@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.ff248f9b.css",
+    "main.css": "/product_catalog/static/css/main.2b61e104.css",
     "main.js": "/product_catalog/static/js/main.ae52974c.js",
     "static/media/logo-nice-gadgets.svg": "/product_catalog/static/media/logo-nice-gadgets.eeb8da3fa7de6e2f3e7d.svg",
     "static/media/shopping-bag-cart.svg": "/product_catalog/static/media/shopping-bag-cart.fbb7bb4b7513df420fa1.svg",
@@ -8,11 +8,11 @@
     "static/media/favourites-heart-like-filled.svg": "/product_catalog/static/media/favourites-heart-like-filled.d554a185325e4fb06092.svg",
     "index.html": "/product_catalog/index.html",
     "static/media/hamburger-menu.svg": "/product_catalog/static/media/hamburger-menu.ccd1a9542b5bc584f2a1.svg",
-    "main.ff248f9b.css.map": "/product_catalog/static/css/main.ff248f9b.css.map",
+    "main.2b61e104.css.map": "/product_catalog/static/css/main.2b61e104.css.map",
     "main.ae52974c.js.map": "/product_catalog/static/js/main.ae52974c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ff248f9b.css",
+    "static/css/main.2b61e104.css",
     "static/js/main.ae52974c.js"
   ]
 }
