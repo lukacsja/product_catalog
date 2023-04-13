@@ -15,14 +15,21 @@
   }
 
   &__logo {
-    height: 24px;
+    height: 21px;
     width: 64px;
     background-image: url('../../public/Icons/logo-nice-gadgets.svg');
     background-repeat: no-repeat;
+    background-size: contain;
+
+    @include onDesktop {
+      height: 28px;
+      width: 80px;
+    }
   }
 
   &__links {
     display: none;
+    list-style-type: none;
 
     @include onTablet {
       display: flex;
@@ -38,6 +45,7 @@
   }
 
   &__link {
+    list-style: none;
     color: $color-secondary-grey;
     font-size: 12px;
     font-weight: 700;
@@ -142,6 +150,19 @@
         height: 16px;
         width: 16px;
         background-image: url('../../public/Icons/hamburger-menu.svg');
+        background-repeat: no-repeat;
+      }
+
+      @include onTablet {
+        display: none;
+      }
+    }
+
+    &--close {
+      &-svg {
+        height: 16px;
+        width: 16px;
+        background-image: url('../../public/Icons/close-menu.svg');
         background-repeat: no-repeat;
       }
 

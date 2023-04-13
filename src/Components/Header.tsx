@@ -1,9 +1,13 @@
 import cn from 'classnames';
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.scss';
 import { NavLink, Route, Routes } from 'react-router-dom';
+import { navItems } from './NavItems';
+import MobileMenu from './MobileMenu';
 
 const Header: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <>
       <div className="navbar">
@@ -14,27 +18,43 @@ const Header: React.FC = () => {
           )}
           to="/home"
         />
-        <div className="navbar__links">
-          {['home', 'phones', 'tablets', 'accessories'].map(item => (
-            <NavLink
-              className={({ isActive }) => cn(
-                'navbar__link',
-                { 'is-active': isActive },
-              )}
-              to={`/${item}`}
-              key={item}
-            >
-              {item}
-            </NavLink>
+        <ul className="navbar__links">
+          {navItems.map(item => (
+            <li key={item}>
+              <NavLink
+                className={({ isActive }) => cn(
+                  'navbar__link',
+                  { 'is-active': isActive },
+                )}
+                to={`/${item}`}
+              >
+                {item}
+              </NavLink>
+            </li>
           ))}
-        </div>
+        </ul>
         <div className="navbar__icons">
-          <div className="navbar__icon navbar__icon--hamburger">
-            <NavLink
-              className="navbar__icon--hamburger-svg"
-              to="/mobile-icon"
-            />
-          </div>
+          {isMobileMenuOpen
+            ? (
+              <div className="navbar__icon navbar__icon--close">
+                <NavLink
+                  className="navbar__icon--close-svg"
+                  to="/home"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                />
+              </div>
+
+            )
+            : (
+              <div className="navbar__icon navbar__icon--hamburger">
+                <NavLink
+                  className="navbar__icon--hamburger-svg"
+                  to="/mobile-menu"
+                  onClick={() => setIsMobileMenuOpen(true)}
+                />
+              </div>
+            )}
+
           <div className="navbar__icon navbar__icon--favourites">
             <NavLink
               className="navbar__icon--favourites-svg"
@@ -49,6 +69,9 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
+      {isMobileMenuOpen && (
+        <MobileMenu />
+      )}
 
       <Routes>
         <Route />
