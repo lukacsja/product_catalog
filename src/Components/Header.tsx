@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import React, { useState } from 'react';
 import './Header.scss';
-import { NavLink, Route, Routes } from 'react-router-dom';
-import { navItems } from './NavItems';
+import { NavLink } from 'react-router-dom';
+import { navItems } from '../NavItems';
 import MobileMenu from './MobileMenu';
 
 const Header: React.FC = () => {
@@ -69,15 +69,10 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      {isMobileMenuOpen && (
-        <MobileMenu />
-      )}
-
-      <Routes>
-        <Route />
-        <Route />
-        <Route />
-      </Routes>
+      <MobileMenu
+        isMenuActive={isMobileMenuOpen}
+        setIsMenuActive={setIsMobileMenuOpen}
+      />
     </>
   );
 };
