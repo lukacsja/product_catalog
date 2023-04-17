@@ -9,19 +9,16 @@ import { Accessories } from './Pages/Accessories';
 
 const App = () => {
   return (
-    <>
-      <div className="App">
-        <Header />
-        {/* <h1 className="title">Welcome to Nice Gadgets store!</h1> */}
-      </div>
+    <div className="App">
+      <Header />
       <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/phones" Component={Phones} />
-        <Route path="/tablets" Component={Tablets} />
-        <Route path="/accessories" Component={Accessories} />
-        <Route path="*" Component={Home} />
+        <Route path="/" element={<Home />} />
+        <Route path="/phones" element={<Phones />} />
+        <Route path="/tablets" element={<Tablets />} />
+        <Route path="/accessories" element={<Accessories />} />
+        {/* <Route path="*" Component={Home} /> */}
       </Routes>
-    </>
+    </div>
   );
 };
 

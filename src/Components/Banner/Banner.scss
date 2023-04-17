@@ -1,0 +1,55 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.banner {
+  &__container {
+    margin-top: 24px;
+    margin-left: -16px;
+    margin-right: -16px;
+
+    @include onTablet {
+      margin-top: 32px;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    @include onDesktop {
+      margin-top: 56px;
+    }
+  }
+
+  // overflow: hidden;
+  width: 100%;
+
+  &__item {
+    white-space: nowrap;
+    transition: ease 1000ms;
+  }
+
+  &__image {
+    display: inline-block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &__buttons {
+    text-align: center;
+  }
+
+  &__button {
+    display: inline-block;
+    margin: 18px 14px 0px;
+    height: 4px;
+    width: 14px;
+    cursor: pointer;
+    background-color: $color-elements-grey;
+    outline: none;
+    border: none;
+
+    &--active {
+      background-color: $color-white;
+    }
+  }
+}

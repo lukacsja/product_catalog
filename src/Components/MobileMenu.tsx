@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
-import { navItems } from '../NavItems';
+import { navItems } from '../Helper';
 import './MobileMenu.scss';
 
 type Props = {
@@ -17,13 +17,13 @@ const MobileMenu: React.FC<Props> = ({ isMenuActive, setIsMenuActive }) => {
     >
       <ul className="menu__links">
         {navItems.map(item => (
-          <li key={item}>
+          <li key={item.name}>
             <NavLink
               className="menu__link"
-              to={`/${item}`}
+              to={item.path}
               onClick={() => setIsMenuActive(false)}
             >
-              {item}
+              {item.name}
             </NavLink>
           </li>
         ))}

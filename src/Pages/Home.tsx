@@ -1,3 +1,11 @@
+import { Banner } from '../Components/Banner';
+import './Home.scss';
+
 export const Home = () => (
-  <h1 style={{ color: 'white' }}>HOME</h1>
+  <div className="home">
+    <div className="home__title--container">
+      <h1 className="home__title">Welcome to Nice Gadgets store!</h1>
+    </div>
+    <Banner />
+  </div>
 );

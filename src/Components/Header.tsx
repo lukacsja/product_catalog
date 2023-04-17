@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import cn from 'classnames';
 import React, { useState } from 'react';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
-import { navItems } from '../NavItems';
+import { navItems } from '../Helper';
 import MobileMenu from './MobileMenu';
 
 const Header: React.FC = () => {
@@ -16,44 +17,33 @@ const Header: React.FC = () => {
             'navbar__logo',
             { 'is-active': isActive },
           )}
-          to="/home"
+          to="/"
         />
         <ul className="navbar__links">
           {navItems.map(item => (
-            <li key={item}>
+            <li key={item.name}>
               <NavLink
                 className={({ isActive }) => cn(
                   'navbar__link',
                   { 'is-active': isActive },
                 )}
-                to={`/${item}`}
+                to={item.path}
               >
-                {item}
+                {item.name}
               </NavLink>
             </li>
           ))}
         </ul>
         <div className="navbar__icons">
-          {isMobileMenuOpen
-            ? (
-              <div className="navbar__icon navbar__icon--close">
-                <NavLink
-                  className="navbar__icon--close-svg"
-                  to="/home"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                />
-              </div>
-
-            )
-            : (
-              <div className="navbar__icon navbar__icon--hamburger">
-                <NavLink
-                  className="navbar__icon--hamburger-svg"
-                  to="/mobile-menu"
-                  onClick={() => setIsMobileMenuOpen(true)}
-                />
-              </div>
-            )}
+          <div className="navbar__icon navbar__icon--hide">
+            <button
+              type="button"
+              className={`navbar__icon--${isMobileMenuOpen
+                ? 'close'
+                : 'hamburger'}-svg`}
+              onClick={() => setIsMobileMenuOpen(prevState => !prevState)}
+            />
+          </div>
 
           <div className="navbar__icon navbar__icon--favourites">
             <NavLink

@@ -45,49 +45,52 @@
   }
 
   &__link {
+    @include font-uppercase-tablet-desktop;
     list-style: none;
     color: $color-secondary-grey;
-    font-size: 12px;
-    font-weight: 700;
     text-decoration: none;
-    text-transform: uppercase;
+    padding-bottom: 12px;
 
     position: relative;
 
     &.is-active {
       color: $color-white;
+      border-bottom: 3px solid $color-white;
 
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -16.5px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background-color: $color-white;
+      // &::after {
+      //   // content: '';
+      //   // position: absolute;
+      //   // bottom: -16.5px;
+      //   // left: 0;
+      //   // width: 100%;
+      //   // height: 3px;
+      //   // background-color: $color-white;
+      //   border-bottom: 3px solid $color-white;
 
-        @include onDesktop {
-          bottom: -24.5px;
-        }
-      }
+      //   // @include onDesktop {
+      //   //   bottom: -24.5px;
+      //   // }
+      // }
     }
 
     &:hover {
       color: $color-white;
+      color: $color-white;
+      border-bottom: 3px solid $color-white;
 
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -16.5px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background-color: $color-white;
+      // &::after {
+      //   content: '';
+      //   position: absolute;
+      //   bottom: -16.5px;
+      //   left: 0;
+      //   width: 100%;
+      //   height: 3px;
+      //   background-color: $color-white;
 
-        @include onDesktop {
-          bottom: -24.5px;
-        }
-      }
+      //   @include onDesktop {
+      //     bottom: -24.5px;
+      //   }
+      // }
     }
   }
 
@@ -105,6 +108,12 @@
     justify-content: center;
     border-left: 1px solid $color-elements-grey;
     border-bottom: 1px solid $color-elements-grey;
+
+    &--hide {
+      @include onTablet {
+        display: none;
+      }
+    }
 
     @include onDesktop {
       height: 64px;
@@ -147,27 +156,25 @@
 
     &--hamburger {
       &-svg {
+        border: none;
+        outline: none;
         height: 16px;
         width: 16px;
         background-image: url('../../public/Icons/hamburger-menu.svg');
         background-repeat: no-repeat;
-      }
-
-      @include onTablet {
-        display: none;
+        cursor: pointer;
       }
     }
 
     &--close {
       &-svg {
+        border: none;
+        outline: none;
         height: 16px;
         width: 16px;
         background-image: url('../../public/Icons/close-menu.svg');
         background-repeat: no-repeat;
-      }
-
-      @include onTablet {
-        display: none;
+        cursor: pointer;
       }
     }
   }
