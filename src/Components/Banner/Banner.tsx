@@ -3,6 +3,8 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import './Banner.scss';
 import { Link } from 'react-router-dom';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { useSwipeable } from 'react-swipeable';
 import {
   bannerImagesMobile,
   bannerImagesTabletPlus,
@@ -45,25 +47,40 @@ export const Banner: React.FC = () => {
     return () => clearInterval(interval);
   }, [index, isMobileView]);
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      setIndex((prevIndex) => (prevIndex === (images.length - 1)
+        ? 0
+        : prevIndex + 1));
+    },
+    onSwipedRight: () => {
+      setIndex((prevIndex) => (prevIndex === 0
+        ? images.length - 1
+        : prevIndex - 1));
+    },
+  });
+
   return (
     <div className="banner__container">
       <div className="banner">
-        <div
-          className="banner__item"
-          style={{ transform: `translateX(${-index * 100}%` }}
-        >
-          {images.map((image) => (
-            <Link
-              to={image.path}
-              key={image.name}
-              className="banner__image-link"
-            >
-              <div
-                className="banner__image"
-                style={{ backgroundImage: `url(${image.name})` }}
-              />
-            </Link>
-          ))}
+        <div {...swipeHandlers}>
+          <div
+            className="banner__item"
+            style={{ transform: `translateX(${-index * 100}%` }}
+          >
+            {images.map((image) => (
+              <Link
+                to={image.path}
+                key={image.name}
+                className="banner__image-link"
+              >
+                <div
+                  className="banner__image"
+                  style={{ backgroundImage: `url(${image.name})` }}
+                />
+              </Link>
+            ))}
+          </div>
         </div>
         <div className="banner__buttons">
           {images.map((image, imageIndex) => (
