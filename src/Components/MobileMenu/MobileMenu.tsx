@@ -1,18 +1,21 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { navItems } from '../utils/_variables';
+import { navItems } from '../../utils/_variables';
 import './MobileMenu.scss';
 
 type Props = {
-  isMenuActive: boolean,
-  setIsMenuActive: (arg: boolean) => void,
+  isMobileMenuOpen: boolean,
+  toggleMobileMenu: () => void,
 };
 
-const MobileMenu: React.FC<Props> = ({ isMenuActive, setIsMenuActive }) => {
+export const MobileMenu: React.FC<Props> = ({
+  isMobileMenuOpen,
+  toggleMobileMenu,
+}) => {
   return (
     <div className={cn(
       'menu',
-      { 'menu-isactive': isMenuActive },
+      { 'menu-isactive': isMobileMenuOpen },
     )}
     >
       <ul className="menu__links">
@@ -21,7 +24,7 @@ const MobileMenu: React.FC<Props> = ({ isMenuActive, setIsMenuActive }) => {
             <Link
               className="menu__link"
               to={item.path}
-              onClick={() => setIsMenuActive(false)}
+              onClick={toggleMobileMenu}
             >
               {item.name}
             </Link>

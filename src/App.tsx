@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
-import Header from './Components/Header';
+import { Header } from './Components/Header';
+import { MobileMenu } from './Components/MobileMenu';
 import { Home } from './Pages/Home';
 import { Phones } from './Pages/Phones';
 import { Tablets } from './Pages/Tablets';
 import { Accessories } from './Pages/Accessories';
 
 const App = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(prevState => !prevState);
+  }, []);
+
   return (
     <div className="App">
-      <Header />
+      <Header
+        isMobileMenuOpen={isMobileMenuOpen}
+        toggleMobileMenu={toggleMobileMenu}
+      />
+      <MobileMenu
+        isMobileMenuOpen={isMobileMenuOpen}
+        toggleMobileMenu={toggleMobileMenu}
+      />
       <Routes>
         <Route path="/" Component={Home} />
         <Route path="/phones" Component={Phones} />

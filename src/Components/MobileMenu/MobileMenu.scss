@@ -1,13 +1,13 @@
-@import '../utils/colors';
-@import '../utils/mixins';
+@import '../../utils/colors';
+@import '../../utils/mixins';
 
 .menu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  position: absolute;
-  z-index: 10;
+  position: fixed;
+  z-index: 1;
   top: 48px;
   bottom: 0;
   width: 100%;
@@ -47,7 +47,7 @@
       left: 0;
       bottom: 0;
       width: 0;
-      height: 2px;
+      height: 3px;
       background-color: $color-white;
       transition: width 300ms ease-in-out;
     }
@@ -79,11 +79,11 @@
       &-svg {
         height: 16px;
         width: 16px;
-        background-image: url('../../public/Icons/favourites-heart-like.svg');
+        background-image: url('../../../public/Icons/favourites-heart-like.svg');
         background-repeat: no-repeat;
 
         &:hover {
-          background-image: url('../../public/Icons/favourites-heart-like-filled.svg');
+          background-image: url('../../../public/Icons/favourites-heart-like-filled.svg');
         }
       }
     }
@@ -92,7 +92,7 @@
       &-svg {
         height: 16px;
         width: 16px;
-        background-image: url('../../public/Icons/shopping-bag-cart.svg');
+        background-image: url('../../../public/Icons/shopping-bag-cart.svg');
         background-repeat: no-repeat;
       }
     }

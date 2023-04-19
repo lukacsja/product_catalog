@@ -1,16 +1,21 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import cn from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
-import { navItems } from '../utils/_variables';
-import MobileMenu from './MobileMenu';
+import { navItems } from '../../utils/_variables';
 
-const Header: React.FC = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+type Props = {
+  isMobileMenuOpen: boolean,
+  toggleMobileMenu: () => void,
+};
 
+export const Header: React.FC<Props> = ({
+  isMobileMenuOpen,
+  toggleMobileMenu,
+}) => {
   return (
-    <>
+    <div className="header">
       <div className="navbar">
         <NavLink
           className={({ isActive }) => cn(
@@ -18,6 +23,11 @@ const Header: React.FC = () => {
             { 'is-active': isActive },
           )}
           to="/"
+          onClick={() => {
+            if (isMobileMenuOpen) {
+              toggleMobileMenu();
+            }
+          }}
         />
         <ul className="navbar__links">
           {navItems.map(item => (
@@ -41,7 +51,7 @@ const Header: React.FC = () => {
               className={`navbar__icon--${isMobileMenuOpen
                 ? 'close'
                 : 'hamburger'}-svg`}
-              onClick={() => setIsMobileMenuOpen(prevState => !prevState)}
+              onClick={toggleMobileMenu}
             />
           </div>
 
@@ -59,11 +69,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       </div>
-      <MobileMenu
-        isMenuActive={isMobileMenuOpen}
-        setIsMenuActive={setIsMobileMenuOpen}
-      />
-    </>
+    </div>
   );
 };
 
