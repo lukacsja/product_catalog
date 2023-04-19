@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import React, { useCallback, useState } from 'react';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
@@ -16,7 +17,11 @@ const App = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className={cn(
+      'App',
+      { 'disable-scroll': isMobileMenuOpen },
+    )}
+    >
       <Header
         isMobileMenuOpen={isMobileMenuOpen}
         toggleMobileMenu={toggleMobileMenu}

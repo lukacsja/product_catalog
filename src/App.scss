@@ -11,3 +11,8 @@
   font-family: 'Montserrat', sans-serif;
   transition: all 300ms;
 }
+
+.disable-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
