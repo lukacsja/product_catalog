@@ -1,7 +1,7 @@
-import banner1 from './banner-images/banner-1.jpg';
-import banner2 from './banner-images/banner-2.jpg';
-import banner3 from './banner-images/banner-3.jpg';
-import banner1tablet from './banner-images/banner-1-tablet_desktop.jpg';
+import banner1 from '../banner-images/banner-1.jpg';
+import banner2 from '../banner-images/banner-2.jpg';
+import banner3 from '../banner-images/banner-3.jpg';
+import banner1tablet from '../banner-images/banner-1-tablet_desktop.jpg';
 
 export const bannerImagesMobile = [
   {

@@ -3,9 +3,12 @@ import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import './Banner.scss';
 import { Link } from 'react-router-dom';
-import { bannerImagesMobile, bannerImagesTabletPlus } from '../../Helper';
+import {
+  bannerImagesMobile,
+  bannerImagesTabletPlus,
+} from '../../utils/_variables';
 
-const delay = 2000;
+const delay = 3000;
 
 const mobileImages = bannerImagesMobile;
 
@@ -30,10 +33,11 @@ export const Banner: React.FC = () => {
     };
   }, []);
 
+  const images = isMobileView ? mobileImages : desktopImages;
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex === (
-        isMobileView ? mobileImages.length - 1 : desktopImages.length - 1)
+      setIndex((prevIndex) => (prevIndex === (images.length - 1)
         ? 0
         : prevIndex + 1));
     }, delay);
@@ -41,14 +45,12 @@ export const Banner: React.FC = () => {
     return () => clearInterval(interval);
   }, [index, isMobileView]);
 
-  const images = isMobileView ? mobileImages : desktopImages;
-
   return (
     <div className="banner__container">
       <div className="banner">
         <div
           className="banner__item"
-          style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
+          style={{ transform: `translateX(${-index * 100}%` }}
         >
           {images.map((image) => (
             <Link

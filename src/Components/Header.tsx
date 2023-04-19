@@ -3,7 +3,7 @@ import cn from 'classnames';
 import React, { useState } from 'react';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
-import { navItems } from '../Helper';
+import { navItems } from '../utils/_variables';
 import MobileMenu from './MobileMenu';
 
 const Header: React.FC = () => {
