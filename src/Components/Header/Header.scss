@@ -158,6 +158,7 @@
     }
 
     &--hamburger {
+
       &-svg {
         border: none;
         outline: none;
@@ -166,6 +167,7 @@
         background-image: url('../../../public/Icons/hamburger-menu.svg');
         background-repeat: no-repeat;
         cursor: pointer;
+        background-color: $color-bg-grey-black;
       }
     }
 
@@ -178,6 +180,7 @@
         background-image: url('../../../public/Icons/close-menu.svg');
         background-repeat: no-repeat;
         cursor: pointer;
+        background-color: $color-bg-grey-black;
       }
     }
   }

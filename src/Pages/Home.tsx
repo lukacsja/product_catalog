@@ -1,11 +1,18 @@
 import { Banner } from '../Components/Banner';
+import { BrandNewModels } from '../Components/BrandNewModels';
+import { Phone } from '../Types/Phone';
 import './Home.scss';
 
-export const Home = () => (
+type Props = {
+  products: Phone[]
+};
+
+export const Home: React.FC<Props> = ({ products }) => (
   <div className="home">
     <div className="home__title--container">
       <h1 className="home__title">Welcome to Nice Gadgets store!</h1>
     </div>
     <Banner />
+    <BrandNewModels products={products} />
   </div>
 );

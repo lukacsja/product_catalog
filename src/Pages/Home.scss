@@ -2,6 +2,7 @@
 @import '../utils/mixins';
 
 .home {
+  background-color: $color-bg-grey-black;
   padding: 24px 16px 64px 16px;
 
   @include onTablet {

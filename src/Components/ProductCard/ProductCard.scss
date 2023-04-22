@@ -1,0 +1,144 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.productcard {
+
+  &__container {
+    margin-bottom: 24px;
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 32px;
+  // temp
+  width: 100%;
+  height: 100%;
+  background-color: $color-surface1-grey;
+
+  &__image {
+    //temp 
+    width: 148px;
+    height: 129px;
+    object-fit: contain;
+
+    @include onTablet {
+      width: 173px;
+      height: 181px;
+    }
+
+    @include onDesktop {
+      width: 208px;
+      height: 196px;
+    }
+
+    &--link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__title {
+    margin-top: 24px;
+    @include font-bodytext-tablet-desktop;
+    color: $color-white;
+    //TEMP >>>
+    font-size: 12px;
+    text-decoration: none;
+  }
+
+  &__prices {
+    display: flex;
+    margin-top: 8px;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid $color-elements-grey;
+  }
+
+  &__price {
+    @include font-h3-tablet-desktop;
+
+    &--full {
+      color: $color-white;
+    }
+
+    &--discounted {
+      color: $color-secondary-grey;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+  }
+
+  &__details {
+    margin-top: 16px;
+
+    @include font-smalltext-tablet-desktop;
+
+    &--line {
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--title {
+      color: $color-secondary-grey;
+    }
+
+    &--value {
+      color: $color-white;
+    }
+  }
+
+  &__buttons {
+    margin-top: 16px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  &__button {
+    height: 40px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: $color-accent;
+
+    &--addtocart {
+      width: 100px;
+      color: $color-white;
+
+      @include onTablet {
+        width: 125px;
+      }
+
+      @include onDesktop {
+        width: 160px;
+      }
+
+      &:hover {
+        background-color: $color-accent-hover;
+      }
+
+      &:active {
+        background-color: $color-surface2-grey;
+      }
+    }
+
+    &--addtofavs {
+      width: 40px;
+      background-image: url('../../../public/Icons/favourites-heart-like.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: $color-surface2-grey;
+    }
+  }
+}

@@ -11,9 +11,7 @@ import {
 } from '../../utils/_variables';
 
 const delay = 3000;
-
 const mobileImages = bannerImagesMobile;
-
 const desktopImages = bannerImagesTabletPlus;
 
 export const Banner: React.FC = () => {

@@ -8,6 +8,7 @@ import { Home } from './Pages/Home';
 import { Phones } from './Pages/Phones';
 import { Tablets } from './Pages/Tablets';
 import { Accessories } from './Pages/Accessories';
+import phonesFromServer from './api/phones.json';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -15,6 +16,12 @@ const App = () => {
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(prevState => !prevState);
   }, []);
+
+  // BrandNewModels >>>
+  const numberOfBrandNews = 8;
+  const phonesByYear = phonesFromServer.sort((phone1, phone2) => (
+    phone2.year - phone1.year));
+  const brandNewList = phonesByYear.slice(0, numberOfBrandNews);
 
   return (
     <div className={cn(
@@ -31,11 +38,11 @@ const App = () => {
         toggleMobileMenu={toggleMobileMenu}
       />
       <Routes>
-        <Route path="/" Component={Home} />
-        <Route path="/phones" Component={Phones} />
-        <Route path="/tablets" Component={Tablets} />
-        <Route path="/accessories" Component={Accessories} />
-        {/* <Route path="*" Component={Home} /> */}
+        <Route path="/" element={<Home products={brandNewList} />} />
+        <Route path="/phones" element={<Phones />} />
+        <Route path="/tablets" element={<Tablets />} />
+        <Route path="/accessories" element={<Accessories />} />
+        {/* <Route path="*" element={<Home />} /> */}
       </Routes>
     </div>
   );

@@ -1,0 +1,78 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.brandnew {
+  &__container {
+    margin-top: 66px;
+
+    @include onTablet {
+      margin-top: 74px;
+    }
+
+    @include onDesktop {
+      margin-top: 90px;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--text {
+      @include font-h2-mobile;
+      color: $color-white;
+
+      @include onTablet {
+        @include font-h2-tablet-desktop;
+      }
+    }
+
+    &--buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    &--button {
+      height: 32px;
+      width: 32px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: $color-surface2-grey;
+      border: 1px solid $color-surface2-grey;
+
+      cursor: pointer;
+      outline: none;
+
+      &:hover {
+        background-color: $color-icons-grey;
+      }
+
+      &:disabled {
+        background-color: $color-bg-grey-black;
+      }
+
+      &-left {
+        background-image: url('../../../public/Icons/arrow_left-white.svg');
+
+        &:disabled {
+          background-image: url('../../../public/Icons/arrow_left-grey.svg');
+        }
+      }
+
+      &-right {
+        background-image: url('../../../public/Icons/arrow_right-white.svg');
+
+        &:disabled {
+          background-image: url('../../../public/Icons/arrow_right-grey.svg');
+        }
+      }
+    }
+  }
+
+  &__productcards {
+    margin-top: 24px;
+    display: flex;
+    gap: 16px;
+  }
+}

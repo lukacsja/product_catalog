@@ -14,6 +14,8 @@
   width: 100%;
   right: -100%;
 
+  background-color: $color-bg-grey-black;
+
   &-isactive {
     right: 0;
   }

@@ -32,6 +32,14 @@
     aspect-ratio: 1 / 1;
     background-repeat: no-repeat;
     background-size: contain;
+
+    @include onTablet {
+      height: 189px;
+    }
+
+    @include onDesktop {
+      height: 400px;
+    }
   }
 
   &__buttons {
