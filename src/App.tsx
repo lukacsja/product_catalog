@@ -25,14 +25,22 @@ const App = () => {
   const brandNewList = phonesByYear.slice(0, numberOfBrandNews);
 
   // Hotprices >>>
-  const numberOfDiscounted = 7;
-  const phonesByDiscount = phonesFromServer.sort((phone1, phone2) => (
-    (phone2.fullPrice - phone2.price) - (phone1.fullPrice - phone1.price)
-  ));
+  const numberOfDiscounted = 8;
+  const phonesByDiscount = phonesFromServer.sort((phone1, phone2) => {
+    const discountA = ((phone1.fullPrice - phone1.price)
+      / phone1.fullPrice) * 100;
+    const discountB = ((phone2.fullPrice - phone2.price)
+      / phone2.fullPrice) * 100;
+
+    return discountB - discountA;
+  });
+
   const hotPricesList = phonesByDiscount.slice(0, numberOfDiscounted);
 
   // eslint-disable-next-line no-console
   console.log(hotPricesList);
+  // eslint-disable-next-line no-console
+  console.log(hotPricesList === brandNewList);
 
   return (
     <div className={cn(
@@ -49,7 +57,15 @@ const App = () => {
         toggleMobileMenu={toggleMobileMenu}
       />
       <Routes>
-        <Route path="/" element={<Home products={brandNewList} />} />
+        <Route
+          path="/"
+          element={(
+            <Home
+              brandNews={brandNewList}
+              hotPrices={hotPricesList}
+            />
+          )}
+        />
         <Route path="/phones" element={<Phones />} />
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/accessories" element={<Accessories />} />

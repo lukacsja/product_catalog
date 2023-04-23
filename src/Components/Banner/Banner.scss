@@ -7,6 +7,8 @@
     margin-left: -16px;
     margin-right: -16px;
 
+    max-width: 1200px;
+
     @include onTablet {
       margin-top: 32px;
       margin-left: 0;

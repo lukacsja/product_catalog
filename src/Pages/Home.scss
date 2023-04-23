@@ -2,6 +2,8 @@
 @import '../utils/mixins';
 
 .home {
+  max-width: 1200px;
+  margin: 0 auto;
   background-color: $color-bg-grey-black;
   padding: 24px 16px 64px 16px;
 

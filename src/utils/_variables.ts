@@ -24,11 +24,11 @@ export const bannerImagesTabletPlus = [
     path: '/phones',
   },
   {
-    name: banner2,
+    name: banner1tablet,
     path: '/tablets',
   },
   {
-    name: banner1,
+    name: banner1tablet,
     path: '/accessories',
   },
 ];

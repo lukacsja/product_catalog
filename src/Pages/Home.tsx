@@ -1,21 +1,22 @@
 import { Banner } from '../Components/Banner';
-import { BrandNewModels } from '../Components/BrandNewModels';
+import { ProductCarousel } from '../Components/ProductCarousel';
 import { Categories } from '../Components/Categories';
 import { Phone } from '../Types/Phone';
 import './Home.scss';
 
 type Props = {
-  products: Phone[]
+  brandNews: Phone[],
+  hotPrices: Phone[],
 };
 
-export const Home: React.FC<Props> = ({ products }) => (
+export const Home: React.FC<Props> = ({ brandNews, hotPrices }) => (
   <div className="home">
     <div className="home__title--container">
       <h1 className="home__title">Welcome to Nice Gadgets store!</h1>
     </div>
     <Banner />
-    <BrandNewModels products={products} title="Brand new models" />
+    <ProductCarousel products={brandNews} title="Brand new models" />
     <Categories />
-    <BrandNewModels products={products} title="Hot prices" />
+    <ProductCarousel products={hotPrices} title="Hot prices" />
   </div>
 );

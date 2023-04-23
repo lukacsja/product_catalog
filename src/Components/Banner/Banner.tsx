@@ -61,24 +61,28 @@ export const Banner: React.FC = () => {
   return (
     <div className="banner__container">
       <div className="banner">
-        <div {...swipeHandlers}>
-          <div
-            className="banner__item"
-            style={{ transform: `translateX(${-index * 100}%` }}
-          >
-            {images.map((image) => (
-              <Link
-                to={image.path}
-                key={image.name}
-                className="banner__image-link"
-              >
-                <div
-                  className="banner__image"
-                  style={{ backgroundImage: `url(${image.name})` }}
-                />
-              </Link>
-            ))}
+        <div className="banner__slideshow">
+          <div className=".banner__arrow banner__arrow--left" />
+          <div {...swipeHandlers}>
+            <div
+              className="banner__item"
+              style={{ transform: `translateX(${-index * 100}%` }}
+            >
+              {images.map((image) => (
+                <Link
+                  to={image.path}
+                  key={image.name}
+                  className="banner__image-link"
+                >
+                  <div
+                    className="banner__image"
+                    style={{ backgroundImage: `url(${image.name})` }}
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
+          <div className=".banner__arrow banner__arrow--right" />
         </div>
         <div className="banner__buttons">
           {images.map((image, imageIndex) => (

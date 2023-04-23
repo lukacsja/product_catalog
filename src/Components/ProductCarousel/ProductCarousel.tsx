@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Phone } from '../../Types/Phone';
 import { ProductCard } from '../ProductCard';
-import './BrandNewModels.scss';
+import './ProductCarousel.scss';
 
 type Props = {
   products: Phone[],
@@ -14,7 +14,7 @@ const mobileWidth = 212;
 const tabletWidth = 237;
 const desktopWidth = 272;
 
-export const BrandNewModels: React.FC<Props> = ({ products, title }) => {
+export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
   const [position, setPosition] = useState(0);
   const [cardWidth, setCardWidth] = useState(212);
 
@@ -70,26 +70,26 @@ export const BrandNewModels: React.FC<Props> = ({ products, title }) => {
   // console.log(cardWidth);
 
   return (
-    <div className="brandnew__container">
-      <div className="brandnew">
-        <div className="brandnew__title">
-          <h2 className="brandnew__title--text">{title}</h2>
-          <div className="brandnew__title--buttons">
+    <div className="carousel__container">
+      <div className="carousel">
+        <div className="carousel__title">
+          <h2 className="carousel__title--text">{title}</h2>
+          <div className="carousel__title--buttons">
             <button
               type="button"
-              className="brandnew__title--button brandnew__title--button-left"
+              className="carousel__title--button carousel__title--button-left"
               onClick={handleSlideLeft}
               disabled={position === 0}
             />
             <button
               type="button"
-              className="brandnew__title--button brandnew__title--button-right"
+              className="carousel__title--button carousel__title--button-right"
               onClick={handleSlideRight}
               disabled={position === maxPosition}
             />
           </div>
         </div>
-        <div className="brandnew__productcards" ref={productCardsRef}>
+        <div className="carousel__productcards" ref={productCardsRef}>
           {products.map(product => (
             <ProductCard
               key={product.id}

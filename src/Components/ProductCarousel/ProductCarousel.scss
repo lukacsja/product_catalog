@@ -1,7 +1,9 @@
 @import '../../utils/colors';
 @import '../../utils/mixins';
 
-.brandnew {
+.carousel {
+  overflow: hidden;
+
   &__container {
     margin-top: 66px;
 
