@@ -27,7 +27,71 @@
   }
 
   &__counter {
+    margin-top: 8px;
     @include font-bodytext-tablet-desktop;
     color: $color-secondary-grey;
+  }
+
+  &__dropdowns {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+  }
+
+  &__dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-basis: 50%;
+
+    @include onTablet {
+      justify-content: flex-start;
+      flex-basis: 25%;
+      width: auto;
+    }
+
+    &--title {
+      @include font-smalltext-tablet-desktop;
+      color: $color-secondary-grey;
+    }
+
+    &--select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: url('../../../public/Icons/arrow_down-grey.svg');
+      background-repeat: no-repeat;
+      background-position: 90% center;
+
+      @include font-buttons-tablet-desktop;
+      color: $color-white;
+      background-color: $color-surface2-grey;
+      height: 40px;
+      border: none;
+      padding: 10px 15px 10px 12px;
+
+      &:hover {
+        border: 1px solid $color-icons-grey;
+      }
+
+      &:focus {
+        border: 1px solid $color-accent;
+      }
+
+      &-option {
+        @include font-bodytext-tablet-desktop;
+        color: $color-secondary-grey;
+        background-color: $color-bg-grey-black;
+
+        &:hover {
+          background-color: $color-surface2-grey;
+        }
+      }
+    }
+  }
+
+  &__list {
+    margin-top: 24px;
+    display: grid;
   }
 }
