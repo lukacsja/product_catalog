@@ -1,0 +1,75 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.categories {
+  &__container {
+    margin-top: 57px;
+
+    @include onTablet {
+      margin-top: 64px;
+    }
+
+    @include onDesktop {
+      margin-top: 80px;
+    }
+  }
+
+  &__title {
+    @include font-h2-mobile;
+    color: $color-white;
+    margin-bottom: 24px;
+
+    @include onDesktop {
+      @include font-h2-tablet-desktop;
+    }
+  }
+
+  &__groups {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    @include onTablet {
+      flex-direction: row;
+      gap: 16px
+    }
+  }
+
+  &__group {
+
+    @include onTablet {
+      width: 33%;
+    }
+
+    &--image {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      &-phones {
+        background-image: url('../../../public/img/category-phones.png');
+      }
+
+      &-tablets {
+        background-image: url('../../../public/img/category-tablets.png');
+      }
+
+      &-accessories {
+        background-image: url('../../../public/img/category-accessories.png');
+      }
+    }
+
+    &--title {
+      @include font-h4-tablet-desktop;
+      color: $color-white;
+      margin-top: 24px;
+    }
+
+    &--description {
+      @include font-bodytext-tablet-desktop;
+      color: $color-secondary-grey;
+      margin-top: 4px;
+    }
+  }
+}

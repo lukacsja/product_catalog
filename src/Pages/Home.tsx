@@ -1,5 +1,6 @@
 import { Banner } from '../Components/Banner';
 import { BrandNewModels } from '../Components/BrandNewModels';
+import { Categories } from '../Components/Categories';
 import { Phone } from '../Types/Phone';
 import './Home.scss';
 
@@ -14,5 +15,6 @@ export const Home: React.FC<Props> = ({ products }) => (
     </div>
     <Banner />
     <BrandNewModels products={products} />
+    <Categories />
   </div>
 );
