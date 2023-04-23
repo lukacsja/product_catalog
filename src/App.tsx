@@ -9,6 +9,7 @@ import { Phones } from './Pages/Phones';
 import { Tablets } from './Pages/Tablets';
 import { Accessories } from './Pages/Accessories';
 import phonesFromServer from './api/phones.json';
+import { Footer } from './Components/Footer';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/accessories" element={<Accessories />} />
         {/* <Route path="*" element={<Home />} /> */}
       </Routes>
+      <Footer />
     </div>
   );
 };
