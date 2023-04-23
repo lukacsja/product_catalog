@@ -6,6 +6,7 @@ import './BrandNewModels.scss';
 
 type Props = {
   products: Phone[],
+  title: string,
 };
 
 const gapSize = 16;
@@ -13,7 +14,7 @@ const mobileWidth = 212;
 const tabletWidth = 237;
 const desktopWidth = 272;
 
-export const BrandNewModels: React.FC<Props> = ({ products }) => {
+export const BrandNewModels: React.FC<Props> = ({ products, title }) => {
   const [position, setPosition] = useState(0);
   const [cardWidth, setCardWidth] = useState(212);
 
@@ -72,7 +73,7 @@ export const BrandNewModels: React.FC<Props> = ({ products }) => {
     <div className="brandnew__container">
       <div className="brandnew">
         <div className="brandnew__title">
-          <h2 className="brandnew__title--text">Brand new models</h2>
+          <h2 className="brandnew__title--text">{title}</h2>
           <div className="brandnew__title--buttons">
             <button
               type="button"

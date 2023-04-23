@@ -14,7 +14,8 @@ export const Home: React.FC<Props> = ({ products }) => (
       <h1 className="home__title">Welcome to Nice Gadgets store!</h1>
     </div>
     <Banner />
-    <BrandNewModels products={products} />
+    <BrandNewModels products={products} title="Brand new models" />
     <Categories />
+    <BrandNewModels products={products} title="Hot prices" />
   </div>
 );

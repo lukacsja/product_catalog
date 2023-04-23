@@ -23,6 +23,16 @@ const App = () => {
     phone2.year - phone1.year));
   const brandNewList = phonesByYear.slice(0, numberOfBrandNews);
 
+  // Hotprices >>>
+  const numberOfDiscounted = 7;
+  const phonesByDiscount = phonesFromServer.sort((phone1, phone2) => (
+    (phone2.fullPrice - phone2.price) - (phone1.fullPrice - phone1.price)
+  ));
+  const hotPricesList = phonesByDiscount.slice(0, numberOfDiscounted);
+
+  // eslint-disable-next-line no-console
+  console.log(hotPricesList);
+
   return (
     <div className={cn(
       'App',
