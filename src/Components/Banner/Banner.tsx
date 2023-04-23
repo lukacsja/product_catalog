@@ -1,9 +1,9 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import './Banner.scss';
 import { Link } from 'react-router-dom';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { useSwipeable } from 'react-swipeable';
 import {
   bannerImagesMobile,
@@ -17,10 +17,14 @@ const desktopImages = bannerImagesTabletPlus;
 export const Banner: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(true);
+  // const [images, setImages] = useState(desktopImages);
+
+  const images = isMobileView ? mobileImages : desktopImages;
 
   useEffect(() => {
     function handleResize() {
       setIsMobileView(window.innerWidth < 640);
+      // setImages(mobileImages);
       setIndex(0);
     }
 
@@ -31,9 +35,11 @@ export const Banner: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [window.innerWidth]);
 
-  const images = isMobileView ? mobileImages : desktopImages;
+  // const images = useMemo(() => {
+  //   return isMobileView ? mobileImages : desktopImages;
+  // }, [isMobileView]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,7 +49,7 @@ export const Banner: React.FC = () => {
     }, delay);
 
     return () => clearInterval(interval);
-  }, [index, isMobileView]);
+  }, [index, images]);
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => {
@@ -58,20 +64,28 @@ export const Banner: React.FC = () => {
     },
   });
 
+  console.log(images.length);
+  console.log(isMobileView);
+
   return (
     <div className="banner__container">
       <div className="banner">
         <div className="banner__slideshow">
-          <div className=".banner__arrow banner__arrow--left" />
+          <button
+            type="button"
+            className="banner__arrow banner__arrow--left"
+          >
+            <i className="fa fa-chevron-left" />
+          </button>
           <div {...swipeHandlers}>
             <div
               className="banner__item"
-              style={{ transform: `translateX(${-index * 100}%` }}
+              style={{ transform: `translateX(${-index * 100}%)` }}
             >
               {images.map((image) => (
                 <Link
                   to={image.path}
-                  key={image.name}
+                  key={image.id}
                   className="banner__image-link"
                 >
                   <div
@@ -82,13 +96,18 @@ export const Banner: React.FC = () => {
               ))}
             </div>
           </div>
-          <div className=".banner__arrow banner__arrow--right" />
+          <button
+            type="button"
+            className="banner__arrow banner__arrow--right"
+          >
+            <i className="fa fa-chevron-right" />
+          </button>
         </div>
         <div className="banner__buttons">
           {images.map((image, imageIndex) => (
             <button
               type="button"
-              key={image.name}
+              key={image.id}
               className={cn(
                 'banner__button',
                 { 'banner__button--active': index === imageIndex },

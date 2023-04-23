@@ -1,0 +1,31 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.breadcrumbs {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  &__home {
+    background-image: url('../../../public/Icons/home.svg');
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+  }
+}
+
+.crumb {
+  &:before {
+    content: url('../../../public/Icons/arrow_right-grey.svg');
+    width: 10px;
+    height: 10px;
+    margin-right: 15px;
+  }
+}
+
+.crumb-link {
+  text-decoration: none;
+  @include font-smalltext-tablet-desktop;
+  color: $color-white;
+  text-transform: capitalize;
+}

@@ -6,8 +6,8 @@ import { Header } from './Components/Header';
 import { MobileMenu } from './Components/MobileMenu';
 import { Home } from './Pages/Home';
 import { Phones } from './Pages/Phones';
-import { Tablets } from './Pages/Tablets';
-import { Accessories } from './Pages/Accessories';
+import { Tablets } from './Pages/Tablets/Tablets';
+import { Accessories } from './Pages/Accessories/Accessories';
 import phonesFromServer from './api/phones.json';
 import { Footer } from './Components/Footer';
 
@@ -66,7 +66,10 @@ const App = () => {
             />
           )}
         />
-        <Route path="/phones" element={<Phones />} />
+        <Route
+          path="/phones"
+          element={<Phones products={phonesFromServer} />}
+        />
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/accessories" element={<Accessories />} />
         {/* <Route path="*" element={<Home />} /> */}

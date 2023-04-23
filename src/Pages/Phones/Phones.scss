@@ -1,0 +1,33 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.phones {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: $color-bg-grey-black;
+  padding: 24px 16px 64px 16px;
+
+  @include onTablet {
+    padding: 32px 24px 64px 24px;
+  }
+
+  @include onDesktop {
+    padding: 56px 32px 80px 32px;
+  }
+
+  &__title {
+    margin-top: 24px;
+    @include font-h1-mobile;
+    color: $color-white;
+
+    @include onTablet {
+      margin-top: 40px;
+      @include font-h1-tablet-desktop;
+    }
+  }
+
+  &__counter {
+    @include font-bodytext-tablet-desktop;
+    color: $color-secondary-grey;
+  }
+}

@@ -1,7 +1,7 @@
-import { Banner } from '../Components/Banner';
-import { ProductCarousel } from '../Components/ProductCarousel';
-import { Categories } from '../Components/Categories';
-import { Phone } from '../Types/Phone';
+import { Banner } from '../../Components/Banner';
+import { ProductCarousel } from '../../Components/ProductCarousel';
+import { Categories } from '../../Components/Categories';
+import { Phone } from '../../Types/Phone';
 import './Home.scss';
 
 type Props = {
