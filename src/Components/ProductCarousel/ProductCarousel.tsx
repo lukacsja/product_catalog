@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useRef, useState } from 'react';
 import { Phone } from '../../Types/Phone';
@@ -18,9 +17,10 @@ const desktopWidth = 272;
 export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
   const [position, setPosition] = useState(0);
   const [cardWidth, setCardWidth] = useState(212);
+  const [step, setStep] = useState(1);
 
-  const productsWidth = products.length * cardWidth
-    + products.length - 1 * gapSize;
+  const productsWidth = (products.length * cardWidth)
+    + ((products.length - 1) * gapSize);
 
   const productCardsRef = useRef<HTMLDivElement>(null);
 
@@ -30,13 +30,13 @@ export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
 
   const handleSlideLeft = () => {
     setPosition(
-      Math.max((position - cardWidth - gapSize), 0),
+      Math.max((position - step * (cardWidth - gapSize)), 0),
     );
   };
 
   const handleSlideRight = () => {
     setPosition(
-      Math.min((position + cardWidth + gapSize), maxPosition),
+      Math.min(step * (position + cardWidth + gapSize), maxPosition),
     );
   };
 
@@ -50,14 +50,17 @@ export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
     function handleResize() {
       if (window.innerWidth >= 1200) {
         setCardWidth(desktopWidth);
+        setStep(4);
       }
 
       if (window.innerWidth < 1200) {
         setCardWidth(tabletWidth);
+        setStep(2);
       }
 
       if (window.innerWidth < 640) {
         setCardWidth(mobileWidth);
+        setStep(1);
       }
 
       setPosition(0);
@@ -72,11 +75,12 @@ export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
     };
   }, [window.innerWidth]);
 
-  console.log(`position: ${position}`);
-  console.log(`maxPosition: ${maxPosition}`);
-  // console.log(cardWidth);
-  console.log(`refwidth: ${refWidth}`);
-  console.log(`allwidth: ${productsWidth}`);
+  // console.log(`position: ${position}`);
+  // console.log(`maxPosition: ${maxPosition}`);
+  // console.log(`refwidth: ${refWidth}`);
+  // console.log(`allwidth: ${productsWidth}`);
+  // console.log(`cardWidth: ${cardWidth}`);
+  // console.log(`step: ${step}`);
 
   return (
     <div className="carousel__container">
