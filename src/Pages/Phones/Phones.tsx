@@ -1,21 +1,46 @@
+import { useState } from 'react';
 import { Breadcrumbs } from '../../Components/Breadcrumbs';
 import { ProductCard } from '../../Components/ProductCard';
 import { Phone } from '../../Types/Phone';
 import './Phones.scss';
+import { Sortby } from '../../Types/Sortby';
+import { ItemsPerPage } from '../../Types/ItemsOnPage';
 
 type Props = {
-  products: Phone[],
+  products: Phone[] | null,
 };
 
 export const Phones: React.FC<Props> = ({ products }) => {
-  // eslint-disable-next-line no-console
-  console.log(products.length);
+  // eslint-disable-next-line max-len
+  // const [itemsPerPage, setItemsPerPage] = useState<ItemsPerPage>(ItemsPerPage.Four);
+  const [sortby, setSortby] = useState<Sortby>(Sortby.Newest);
+  const [phones, setPhones] = useState<Phone[] | null>(products);
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedSort = event.target.value as Sortby;
+
+    switch (selectedSort) {
+      case Sortby.Cheapest:
+        setPhones(phones?.sort((a, b) => a.price - b.price) ?? null);
+        break;
+      case Sortby.Newest:
+        setPhones(phones?.sort((a, b) => b.year - a.year) ?? null);
+        break;
+      case Sortby.Alphabet:
+        setPhones(phones?.sort((a, b) => a.name.localeCompare(b.name)) ?? null);
+        break;
+      default:
+        break;
+    }
+
+    setSortby(selectedSort);
+  };
 
   return (
     <div className="phones">
       <Breadcrumbs />
       <h1 className="phones__title">Mobile phones</h1>
-      <div className="phones__counter">{`${products.length} models`}</div>
+      <div className="phones__counter">{`${products?.length} models`}</div>
       <div className="phones__dropdowns">
         <div className="phones__dropdown">
           <label
@@ -27,24 +52,26 @@ export const Phones: React.FC<Props> = ({ products }) => {
           <select
             className="phones__dropdown--select"
             name="sort-by"
+            value={sortby}
+            onChange={handleSortChange}
           >
             <option
               className="phones__dropdown--select-option"
-              value="newest"
+              value={Sortby.Newest}
             >
-              Newest
+              {Sortby.Newest}
             </option>
             <option
               className="phones__dropdown--select-option"
-              value="alphabet"
+              value={Sortby.Alphabet}
             >
-              Alphabetically
+              {Sortby.Alphabet}
             </option>
             <option
               className="phones__dropdown--select-option"
-              value="cheapest"
+              value={Sortby.Cheapest}
             >
-              Cheapest
+              {Sortby.Cheapest}
             </option>
           </select>
         </div>
@@ -61,33 +88,33 @@ export const Phones: React.FC<Props> = ({ products }) => {
           >
             <option
               className="phones__dropdown--select-option"
-              value="4"
+              value={ItemsPerPage.Four}
             >
-              4
+              {ItemsPerPage.Four}
             </option>
             <option
               className="phones__dropdown--select-option"
-              value="8"
+              value={ItemsPerPage.Eight}
             >
-              8
+              {ItemsPerPage.Eight}
             </option>
             <option
               className="phones__dropdown--select-option"
-              value="16"
+              value={ItemsPerPage.Sixteen}
             >
-              16
+              {ItemsPerPage.Sixteen}
             </option>
             <option
               className="phones__dropdown--select-option"
-              value="all"
+              value={ItemsPerPage.All}
             >
-              All
+              {ItemsPerPage.All}
             </option>
           </select>
         </div>
       </div>
       <div className="phones__list">
-        {products.map(product => (
+        {phones?.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

@@ -92,9 +92,18 @@
 
   &__list {
     margin-top: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 212px);
+    column-gap: 16px;
+    row-gap: 40px;
+    justify-content: center;
+
+    @include onTablet {
+      grid-template-columns: repeat(auto-fill, 237px, 1fr);
+    }
+
+    @include onTablet {
+      grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+    }
   }
 }
