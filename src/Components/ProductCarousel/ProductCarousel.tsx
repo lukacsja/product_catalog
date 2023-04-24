@@ -75,13 +75,6 @@ export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
     };
   }, [window.innerWidth]);
 
-  // console.log(`position: ${position}`);
-  // console.log(`maxPosition: ${maxPosition}`);
-  // console.log(`refwidth: ${refWidth}`);
-  // console.log(`allwidth: ${productsWidth}`);
-  // console.log(`cardWidth: ${cardWidth}`);
-  // console.log(`step: ${step}`);
-
   return (
     <div className="carousel__container">
       <div className="carousel">

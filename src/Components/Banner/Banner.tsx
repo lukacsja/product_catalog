@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
@@ -57,9 +56,6 @@ export const Banner: React.FC = () => {
         : prevIndex - 1));
     },
   });
-
-  // console.log(images.length);
-  // console.log(isMobileView);
 
   return (
     <div className="banner__container">

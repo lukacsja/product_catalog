@@ -37,11 +37,6 @@ const App = () => {
 
   const hotPricesList = phonesByDiscount.slice(0, numberOfDiscounted);
 
-  // eslint-disable-next-line no-console
-  console.log(hotPricesList);
-  // eslint-disable-next-line no-console
-  console.log(hotPricesList === brandNewList);
-
   return (
     <div className={cn(
       'App',
