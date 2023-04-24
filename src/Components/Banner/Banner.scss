@@ -31,20 +31,20 @@
   &__image {
     display: inline-block;
     width: 100%;
-    padding-top: 100%;
+    aspect-ratio: 1 / 1;
     background-repeat: no-repeat;
     background-size: contain;
 
     @include onTablet {
       padding-top: 0;
-      min-height: 189px;
-      min-width: 490px;
+      width: 100%;
+      aspect-ratio: 2.5 / 1;
     }
 
     @include onDesktop {
       padding-top: 0;
-      min-height: 400px;
-      min-width: 1040px;
+      width: 100%;
+      aspect-ratio: 2.5 / 1;
     }
   }
 
@@ -64,56 +64,6 @@
 
     &--active {
       background-color: $color-white;
-    }
-  }
-
-  &__slideshow {
-    position: relative;
-    gap: 16px;
-  }
-
-  &__arrow {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 32px;
-    cursor: pointer;
-    z-index: 10;
-
-    background-color: $color-surface2-grey;
-    background-position: center;
-
-    border: none;
-    outline: none;
-
-    &--left {
-      left: 0;
-      background-image: url('../../../public/Icons/arrow_left-white.svg');
-      background-repeat: no-repeat;
-      background-size: contain;
-
-      @include onMobile {
-        display: none;
-      }
-
-      @include onTablet {
-        display: block;
-      }
-    }
-
-    &--right {
-      right: 0;
-      background-image: url('../../../public/Icons/arrow_right-white.svg');
-      background-repeat: no-repeat;
-      background-size: contain;
-
-      @include onMobile {
-        display: none;
-      }
-
-      @include onTablet {
-        display: block;
-      }
     }
   }
 }

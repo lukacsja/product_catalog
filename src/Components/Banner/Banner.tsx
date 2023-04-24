@@ -17,14 +17,12 @@ const desktopImages = bannerImagesTabletPlus;
 export const Banner: React.FC = () => {
   const [index, setIndex] = useState(0);
   const [isMobileView, setIsMobileView] = useState(true);
-  // const [images, setImages] = useState(desktopImages);
 
   const images = isMobileView ? mobileImages : desktopImages;
 
   useEffect(() => {
     function handleResize() {
       setIsMobileView(window.innerWidth < 640);
-      // setImages(mobileImages);
       setIndex(0);
     }
 
@@ -36,10 +34,6 @@ export const Banner: React.FC = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [window.innerWidth]);
-
-  // const images = useMemo(() => {
-  //   return isMobileView ? mobileImages : desktopImages;
-  // }, [isMobileView]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,12 +65,7 @@ export const Banner: React.FC = () => {
     <div className="banner__container">
       <div className="banner">
         <div className="banner__slideshow">
-          <button
-            type="button"
-            className="banner__arrow banner__arrow--left"
-          >
-            <i className="fa fa-chevron-left" />
-          </button>
+          {/* <div className=".banner__arrow banner__arrow--left" /> */}
           <div {...swipeHandlers}>
             <div
               className="banner__item"
@@ -96,12 +85,7 @@ export const Banner: React.FC = () => {
               ))}
             </div>
           </div>
-          <button
-            type="button"
-            className="banner__arrow banner__arrow--right"
-          >
-            <i className="fa fa-chevron-right" />
-          </button>
+          {/* <div className=".banner__arrow banner__arrow--right" /> */}
         </div>
         <div className="banner__buttons">
           {images.map((image, imageIndex) => (
