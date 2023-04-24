@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useRef, useState } from 'react';
 import { Phone } from '../../Types/Phone';
@@ -18,16 +19,25 @@ export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
   const [position, setPosition] = useState(0);
   const [cardWidth, setCardWidth] = useState(212);
 
+  const productsWidth = products.length * cardWidth
+    + products.length - 1 * gapSize;
+
   const productCardsRef = useRef<HTMLDivElement>(null);
 
-  const maxPosition = ((7 * cardWidth) + (7 * gapSize));
+  const refWidth = productCardsRef.current?.clientWidth ?? 0;
+
+  const maxPosition = productsWidth - refWidth;
 
   const handleSlideLeft = () => {
-    setPosition(position - cardWidth - gapSize);
+    setPosition(
+      Math.max((position - cardWidth - gapSize), 0),
+    );
   };
 
   const handleSlideRight = () => {
-    setPosition(position + cardWidth + gapSize);
+    setPosition(
+      Math.min((position + cardWidth + gapSize), maxPosition),
+    );
   };
 
   useEffect(() => {
@@ -62,12 +72,11 @@ export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
     };
   }, [window.innerWidth]);
 
-  // // eslint-disable-next-line no-console
-  // console.log(position);
-  // // eslint-disable-next-line no-console
-  // console.log(maxPosition);
-  // // eslint-disable-next-line no-console
+  console.log(`position: ${position}`);
+  console.log(`maxPosition: ${maxPosition}`);
   // console.log(cardWidth);
+  console.log(`refwidth: ${refWidth}`);
+  console.log(`allwidth: ${productsWidth}`);
 
   return (
     <div className="carousel__container">
