@@ -58,8 +58,8 @@ export const Banner: React.FC = () => {
     },
   });
 
-  console.log(images.length);
-  console.log(isMobileView);
+  // console.log(images.length);
+  // console.log(isMobileView);
 
   return (
     <div className="banner__container">

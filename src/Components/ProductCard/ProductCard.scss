@@ -12,9 +12,17 @@
 
   padding: 32px;
   // temp
-  width: 100%;
+  width: 212px;
   height: 100%;
   background-color: $color-surface1-grey;
+
+  @include onTablet {
+    width: 237px;
+  }
+
+  @include onDesktop {
+    width: 272px;
+  }
 
   &__image {
     //temp 
