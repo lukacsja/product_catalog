@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+/* eslint-disable import/no-dynamic-require */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { Link } from 'react-router-dom';
 import { Phone } from '../../Types/Phone';
@@ -15,8 +17,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           <Link className="productcard__image--link" to="/">
             <img
               className="productcard__image"
-              // eslint-disable-next-line global-require
-              src={require('../../img/phones/apple-iphone-11/black/00.jpg')}
+              src={require(`../../${product.image}`)}
               alt={product.name}
             />
           </Link>

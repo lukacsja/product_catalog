@@ -107,3 +107,65 @@
     }
   }
 }
+
+.pagination {
+  margin-top: 24px;
+
+  @include onTablet {
+    margin-top: 40px;
+  }
+
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  &__numbers {
+    display: flex;
+    gap: 8px;
+    // width: 150px;
+    // text-overflow: ellipsis;
+    // overflow: hidden;
+    // white-space: nowrap;
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+
+    @include font-bodytext-tablet-desktop;
+    color: $color-white;
+    background-color: $color-surface1-grey;
+    text-decoration: none;
+  }
+
+  &__prev {
+    background-image: url('../../../public/Icons/arrow_left-white.svg');
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: center center;
+    background-color: $color-surface2-grey;
+
+    &:disabled {
+      background-image: url('../../../public/Icons/arrow_left-grey.svg');
+    }
+  }
+
+  &__next {
+    background-image: url('../../../public/Icons/arrow_right-white.svg');
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: center center;
+    background-color: $color-surface2-grey;
+
+    &:disabled {
+      background-image: url('../../../public/Icons/arrow_right-grey.svg');
+    }
+  }
+}
+
+.dots {
+  color: $color-white;
+}

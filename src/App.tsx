@@ -62,9 +62,14 @@ const App = () => {
           )}
         />
         <Route
-          path="/phones"
+          path="/phones/:currentPage"
           element={<Phones products={phonesFromServer} />}
         />
+        <Route
+          path="/phones/"
+          element={<Phones products={phonesFromServer} />}
+        />
+
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/accessories" element={<Accessories />} />
         {/* <Route path="*" element={<Home />} /> */}
