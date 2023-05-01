@@ -1,12 +1,12 @@
 /* eslint-disable padding-line-between-statements */
-import cn from 'classnames';
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Breadcrumbs } from '../../Components/Breadcrumbs';
 import { ProductCard } from '../../Components/ProductCard';
 import { Phone } from '../../Types/Phone';
 import './Phones.scss';
 import { Sortby } from '../../Types/Sortby';
+import { Pagination } from '../../Components/Pagination';
 
 type Props = {
   products: Phone[],
@@ -14,43 +14,19 @@ type Props = {
 
 export const Phones: React.FC<Props> = ({ products }) => {
   const [perPage, setPerPage] = useState<number>(4);
-  // const [currentPage, setCurrentPage] = useState<number>(1);
   const [sortby, setSortby] = useState<Sortby>(Sortby.Newest);
   const [phones, setPhones] = useState<Phone[]>(products);
 
   const { currentPage: currentPageString } = useParams();
   const currentPage = Number(currentPageString);
 
-  const totalItems = phones?.length;
   const startIndex = (currentPage - 1) * perPage;
   const endIndex = startIndex + perPage;
   const currentItems = phones?.slice(startIndex, endIndex);
-  // const lastItemOfPage = endIndex > totalItems
-  //   ? totalItems
-  //   : endIndex;
 
-  const requiredPages = Math.ceil(totalItems / perPage);
-  const pageList = Array.from({ length: requiredPages }, (_, i) => i + 1);
-  const firstPage = pageList[0];
-  const lastPage = pageList[pageList.length - 1];
-  const previousPage = currentPage - 1;
-  const nextPage = currentPage + 1;
-
-  // const handleNextButton = () => {
-  //   if (currentPage === lastPage) {
-  //     return;
-  //   }
-
-  //   setCurrentPage(currentPage + 1);
-  // };
-
-  // const handlePrevButton = () => {
-  //   if (currentPage === firstPage) {
-  //     return;
-  //   }
-
-  //   setCurrentPage(currentPage - 1);
-  // };
+  // useEffect(() => {
+  //   setPhones(currentItems);
+  // }, []);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSort = event.target.value as Sortby;
@@ -78,19 +54,6 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     setPerPage(selectedValue);
   };
-
-  const pageUrls = pageList.map(page => (
-    <Link
-      to={`/phones/${page}`}
-      key={page}
-      className={cn(
-        'pagination__link',
-        { 'pagination__link-isactive': page === currentPage },
-      )}
-    >
-      {page}
-    </Link>
-  ));
 
   return (
     <div className="phones">
@@ -175,31 +138,14 @@ export const Phones: React.FC<Props> = ({ products }) => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-
-      <div className="pagination">
-        <Link
-          to={`/phones/${previousPage}`}
-          className="pagination__link pagination__prev"
-          aria-disabled={currentPage === firstPage}
-        // onClick={handlePrevButton}
+      {phones.length && (
+        <Pagination
+          totalItems={products.length}
+          itemsPerPage={perPage}
+          urlPrefix="phones"
         />
-        <div className="pagination__numbers">
-          {pageUrls.slice(currentPage - 1, currentPage + 3)}
-          {!(currentPage >= requiredPages - 4) && (
-            <>
-              <span className="dots">...</span>
-              {[...pageUrls].reverse().slice(0, 2).reverse()}
-            </>
-          )}
+      )}
 
-        </div>
-        <Link
-          to={`/phones/${nextPage}`}
-          className="pagination__link pagination__next"
-          aria-disabled={currentPage === lastPage}
-        // onClick={handleNextButton}
-        />
-      </div>
     </div>
   );
 };

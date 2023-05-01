@@ -139,6 +139,10 @@
     color: $color-white;
     background-color: $color-surface1-grey;
     text-decoration: none;
+
+    &-isactive {
+      background-color: $color-accent;
+    }
   }
 
   &__prev {
@@ -164,8 +168,11 @@
       background-image: url('../../../public/Icons/arrow_right-grey.svg');
     }
   }
-}
 
-.dots {
-  color: $color-white;
+  &__dots {
+    font-size: 24px;
+    display: flex;
+    color: $color-white;
+    align-items: flex-end;
+  }
 }

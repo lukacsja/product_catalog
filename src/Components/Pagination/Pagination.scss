@@ -1,0 +1,73 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.pagination {
+  margin-top: 24px;
+
+  @include onTablet {
+    margin-top: 40px;
+  }
+
+  &__list {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    list-style: none;
+
+    li:first-child {
+      margin-right: 8px;
+    }
+
+    li:last-child {
+      margin-left: 8px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+
+    cursor: pointer;
+    border: none;
+    outline: none;
+
+    @include font-bodytext-tablet-desktop;
+    color: $color-white;
+    background-color: $color-surface1-grey;
+
+    &--isActive {
+      background-color: $color-accent;
+    }
+
+    &--prev {
+      background-image: url('../../../public/Icons/arrow_left-white.svg');
+      background-repeat: no-repeat;
+      background-size: 20%;
+      background-position: center center;
+      background-color: $color-surface2-grey;
+
+      &:disabled {
+        background-image: url('../../../public/Icons/arrow_left-grey.svg');
+        background-color: $color-surface1-grey;
+        background-size: 70%;
+      }
+    }
+
+    &--next {
+      background-image: url('../../../public/Icons/arrow_right-white.svg');
+      background-repeat: no-repeat;
+      background-size: 20%;
+      background-position: center center;
+      background-color: $color-surface2-grey;
+
+      &:disabled {
+        background-image: url('../../../public/Icons/arrow_right-grey.svg');
+        background-color: $color-surface1-grey;
+      }
+    }
+  }
+}

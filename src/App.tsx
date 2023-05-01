@@ -8,8 +8,8 @@ import { Home } from './Pages/Home';
 import { Phones } from './Pages/Phones';
 import { Tablets } from './Pages/Tablets/Tablets';
 import { Accessories } from './Pages/Accessories/Accessories';
-import phonesFromServer from './api/phones.json';
 import { Footer } from './Components/Footer';
+import phonesFromServer from './api/phones.json';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,6 +19,9 @@ const App = () => {
   }, []);
 
   // BrandNewModels >>>
+  // const getBrandNews = (itemCount: number, data: {}[]) => {
+
+  // }
   const numberOfBrandNews = 8;
   const phonesByYear = phonesFromServer.sort((phone1, phone2) => (
     phone2.year - phone1.year));
