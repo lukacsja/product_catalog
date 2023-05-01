@@ -1,26 +1,28 @@
 import cn from 'classnames';
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Pagination.scss';
 
 type Props = {
   totalItems: number,
   itemsPerPage: number,
-  urlPrefix: string,
   currentPage: number,
 };
 
 export const Pagination: React.FC<Props> = ({
   totalItems,
   itemsPerPage,
-  urlPrefix,
   currentPage,
 }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
   const handlePrevLink = () => {
     if (currentPage > 1) {
-      return `/${urlPrefix}/${currentPage - 1}`;
+      searchParams.set('page', String(currentPage - 1));
+
+      return `?${searchParams.toString()}`;
     }
 
     return '';
@@ -28,7 +30,9 @@ export const Pagination: React.FC<Props> = ({
 
   const handleNextLink = () => {
     if (currentPage < totalPages) {
-      return `/${urlPrefix}/${currentPage + 1}`;
+      searchParams.set('page', String(currentPage + 1));
+
+      return `?${searchParams.toString()}`;
     }
 
     return '';
@@ -38,8 +42,7 @@ export const Pagination: React.FC<Props> = ({
     const pageLinks = [];
     const maxVisibleLinks = 5;
 
-    let startPage = Math.max(1, currentPage
-      - Math.floor(maxVisibleLinks / 2));
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisibleLinks / 2));
     const endPage = Math.min(totalPages, startPage + maxVisibleLinks - 1);
 
     if (endPage - startPage + 1 < maxVisibleLinks) {
@@ -47,16 +50,19 @@ export const Pagination: React.FC<Props> = ({
     }
 
     for (let page = startPage; page <= endPage; page += 1) {
+      searchParams.set('page', String(page));
+      const pageLink = `?${searchParams.toString()}`;
+
       pageLinks.push(
         <li key={page}>
-          <NavLink
-            to={`/${urlPrefix}/${page}`}
+          <Link
+            to={pageLink}
             className={cn('pagination__item', {
               'pagination__item--isActive': currentPage === page,
             })}
           >
             {page}
-          </NavLink>
+          </Link>
         </li>,
       );
     }

@@ -1,6 +1,6 @@
 /* eslint-disable padding-line-between-statements */
-import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Breadcrumbs } from '../../Components/Breadcrumbs';
 import { ProductCard } from '../../Components/ProductCard';
 import { Phone } from '../../Types/Phone';
@@ -17,8 +17,9 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const [sortby, setSortby] = useState<Sortby>(Sortby.Newest);
   const [phones, setPhones] = useState<Phone[]>(products);
 
-  const { currentPage: currentPageString } = useParams();
-  const currentPage = Number(currentPageString) || 1;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const currentPage = Number(searchParams.get('page')) || 1;
 
   const getCurrentItems = () => {
     const startIndex = (currentPage - 1) * perPage;
@@ -53,6 +54,11 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     setPerPage(selectedValue);
   };
+
+  useEffect(() => {
+    searchParams.set('page', String(currentPage));
+    window.history.replaceState(null, '', `${location.pathname}?${searchParams.toString()}`);
+  }, [currentPage, location.pathname, searchParams]);
 
   return (
     <div className="phones">
@@ -141,7 +147,6 @@ export const Phones: React.FC<Props> = ({ products }) => {
         <Pagination
           totalItems={products.length}
           itemsPerPage={perPage}
-          urlPrefix="phones"
           currentPage={currentPage}
         />
       )}
