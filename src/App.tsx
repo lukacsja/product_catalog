@@ -70,7 +70,15 @@ const App = () => {
 
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/accessories" element={<Accessories />} />
-        {/* <Route path="*" element={<Home />} /> */}
+        <Route
+          path="*"
+          element={(
+            <Home
+              brandNews={getBrandNews(8)}
+              hotPrices={getHotPrices(10)}
+            />
+          )}
+        />
       </Routes>
       <Footer />
     </div>

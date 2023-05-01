@@ -1,6 +1,6 @@
 /* eslint-disable padding-line-between-statements */
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Breadcrumbs } from '../../Components/Breadcrumbs';
 import { ProductCard } from '../../Components/ProductCard';
 import { Phone } from '../../Types/Phone';
@@ -14,12 +14,27 @@ type Props = {
 
 export const Phones: React.FC<Props> = ({ products }) => {
   const [perPage, setPerPage] = useState<number>(4);
-  const [sortby, setSortby] = useState<Sortby>(Sortby.Newest);
-  const [phones, setPhones] = useState<Phone[]>(products);
-
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const currentPage = Number(searchParams.get('page')) || 1;
+  const urls = searchParams.get('sort') || Sortby.Newest;
+  const [sortby, setSortby] = useState<Sortby>(urls as Sortby);
+  const [phones, setPhones] = useState<Phone[]>(products);
+
+  const currentPage = Number(searchParams.get('page'));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!currentPage) {
+      searchParams.set('page', '1');
+    }
+    searchParams.set('sort', sortby);
+    navigate(`?${searchParams.toString()}`);
+  }, [sortby]);
+
+  // useEffect(() => {
+
+  //   navigate(`?${searchParams.toString()}`);
+  // }, [sortby]);
 
   const getCurrentItems = () => {
     const startIndex = (currentPage - 1) * perPage;
@@ -33,13 +48,13 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     switch (selectedSort) {
       case Sortby.Cheapest:
-        setPhones(phones?.sort((a, b) => a.price - b.price) ?? null);
+        setPhones(phones.sort((a, b) => a.price - b.price));
         break;
       case Sortby.Newest:
-        setPhones(phones?.sort((a, b) => b.year - a.year) ?? null);
+        setPhones(phones.sort((a, b) => b.year - a.year));
         break;
       case Sortby.Alphabet:
-        setPhones(phones?.sort((a, b) => a.name.localeCompare(b.name)) ?? null);
+        setPhones(phones.sort((a, b) => a.name.localeCompare(b.name)));
         break;
       default:
         break;
@@ -55,10 +70,10 @@ export const Phones: React.FC<Props> = ({ products }) => {
     setPerPage(selectedValue);
   };
 
-  useEffect(() => {
-    searchParams.set('page', String(currentPage));
-    window.history.replaceState(null, '', `${location.pathname}?${searchParams.toString()}`);
-  }, [currentPage, location.pathname, searchParams]);
+  // useEffect(() => {
+  //   searchParams.set('page', String(currentPage));
+  //   window.history.replaceState(null, '', `${location.pathname}?${searchParams.toString()}`);
+  // }, [currentPage, location.pathname, searchParams]);
 
   return (
     <div className="phones">

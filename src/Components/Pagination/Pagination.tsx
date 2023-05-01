@@ -41,6 +41,8 @@ export const Pagination: React.FC<Props> = ({
   const getPageLinks = () => {
     const pageLinks = [];
     const maxVisibleLinks = 5;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    // const { pathname } = useLocation();
 
     let startPage = Math.max(1, currentPage - Math.floor(maxVisibleLinks / 2));
     const endPage = Math.min(totalPages, startPage + maxVisibleLinks - 1);
