@@ -18,15 +18,14 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const [phones, setPhones] = useState<Phone[]>(products);
 
   const { currentPage: currentPageString } = useParams();
-  const currentPage = Number(currentPageString);
+  const currentPage = Number(currentPageString) || 1;
 
-  const startIndex = (currentPage - 1) * perPage;
-  const endIndex = startIndex + perPage;
-  const currentItems = phones?.slice(startIndex, endIndex);
+  const getCurrentItems = () => {
+    const startIndex = (currentPage - 1) * perPage;
+    const endIndex = startIndex + perPage;
 
-  // useEffect(() => {
-  //   setPhones(currentItems);
-  // }, []);
+    return phones?.slice(startIndex, endIndex);
+  };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSort = event.target.value as Sortby;
@@ -134,7 +133,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
         </div>
       </div>
       <div className="phones__list">
-        {currentItems.map(product => (
+        {getCurrentItems().map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
@@ -143,6 +142,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
           totalItems={products.length}
           itemsPerPage={perPage}
           urlPrefix="phones"
+          currentPage={currentPage}
         />
       )}
 

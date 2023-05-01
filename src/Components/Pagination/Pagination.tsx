@@ -1,91 +1,89 @@
 import cn from 'classnames';
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import './Pagination.scss';
 
 type Props = {
   totalItems: number,
   itemsPerPage: number,
   urlPrefix: string,
+  currentPage: number,
 };
 
 export const Pagination: React.FC<Props> = ({
   totalItems,
   itemsPerPage,
   urlPrefix,
+  currentPage,
 }) => {
-  const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  const handleClick = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    navigate(`/${urlPrefix}/${pageNumber}`);
-    // window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handlePrevLink = () => {
+    if (currentPage > 1) {
+      return `/${urlPrefix}/${currentPage - 1}`;
+    }
+
+    return '';
   };
 
-  useEffect(() => {
-    const pageNumber = parseInt(location.pathname.split('/').pop() || '1', 10);
-
-    if (pageNumber !== currentPage) {
-      setCurrentPage(pageNumber);
+  const handleNextLink = () => {
+    if (currentPage < totalPages) {
+      return `/${urlPrefix}/${currentPage + 1}`;
     }
-  }, [location, currentPage]);
 
-  const getPageButtons = () => {
-    const pageButtons = [];
-    const maxVisibleButtons = 5;
+    return '';
+  };
+
+  const getPageLinks = () => {
+    const pageLinks = [];
+    const maxVisibleLinks = 5;
 
     let startPage = Math.max(1, currentPage
-      - Math.floor(maxVisibleButtons / 2));
-    const endPage = Math.min(totalPages, startPage + maxVisibleButtons - 1);
+      - Math.floor(maxVisibleLinks / 2));
+    const endPage = Math.min(totalPages, startPage + maxVisibleLinks - 1);
 
-    if (endPage - startPage + 1 < maxVisibleButtons) {
-      startPage = Math.max(1, endPage - maxVisibleButtons + 1);
+    if (endPage - startPage + 1 < maxVisibleLinks) {
+      startPage = Math.max(1, endPage - maxVisibleLinks + 1);
     }
 
-    // eslint-disable-next-line no-plusplus
-    for (let page = startPage; page <= endPage; page++) {
-      pageButtons.push(
+    for (let page = startPage; page <= endPage; page += 1) {
+      pageLinks.push(
         <li key={page}>
-          <button
-            type="button"
-            title="button"
-            onClick={() => handleClick(page)}
+          <NavLink
+            to={`/${urlPrefix}/${page}`}
             className={cn('pagination__item', {
               'pagination__item--isActive': currentPage === page,
             })}
           >
             {page}
-          </button>
+          </NavLink>
         </li>,
       );
     }
 
-    return pageButtons;
+    return pageLinks;
   };
 
   return (
     <div className="pagination">
       <ul className="pagination__list">
         <li className="pagination__arrow">
-          <button
-            aria-label="prev page"
-            type="button"
-            onClick={() => handleClick(currentPage - 1)}
-            className="pagination__item pagination__item--prev"
-            disabled={currentPage === 1}
+          <Link
+            to={handlePrevLink()}
+            className={cn(
+              'pagination__item pagination__item--prev',
+              { 'pagination__item--prev-disabled': currentPage === 1 },
+            )}
           />
         </li>
-        {getPageButtons()}
+        {getPageLinks()}
         <li className="pagination__arrow">
-          <button
-            aria-label="next page"
-            type="button"
-            onClick={() => handleClick(currentPage + 1)}
-            className="pagination__item pagination__item--next"
-            disabled={currentPage === totalPages}
+          <Link
+            to={handleNextLink()}
+            className={cn(
+              'pagination__item pagination__item--next',
+              { 'pagination__item--next-disabled': currentPage === totalPages },
+            )}
           />
         </li>
       </ul>

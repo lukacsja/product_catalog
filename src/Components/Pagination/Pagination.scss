@@ -31,9 +31,9 @@
     height: 32px;
     width: 32px;
 
-    cursor: pointer;
-    border: none;
-    outline: none;
+    text-decoration: none;
+    // border: none;
+    // outline: none;
 
     @include font-bodytext-tablet-desktop;
     color: $color-white;
@@ -50,7 +50,7 @@
       background-position: center center;
       background-color: $color-surface2-grey;
 
-      &:disabled {
+      &-disabled {
         background-image: url('../../../public/Icons/arrow_left-grey.svg');
         background-color: $color-surface1-grey;
         background-size: 70%;
@@ -64,7 +64,7 @@
       background-position: center center;
       background-color: $color-surface2-grey;
 
-      &:disabled {
+      &-disabled {
         background-image: url('../../../public/Icons/arrow_right-grey.svg');
         background-color: $color-surface1-grey;
       }

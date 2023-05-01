@@ -64,13 +64,13 @@ const App = () => {
           )}
         />
         <Route
-          path="/phones/:currentPage"
+          path="/phones/:currentPage?"
           element={<Phones products={phones} />}
         />
-        <Route
+        {/* <Route
           path="/phones/"
           element={<Phones products={phones} />}
-        />
+        /> */}
 
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/accessories" element={<Accessories />} />
