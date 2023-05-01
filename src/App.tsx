@@ -9,7 +9,8 @@ import { Phones } from './Pages/Phones';
 import { Tablets } from './Pages/Tablets/Tablets';
 import { Accessories } from './Pages/Accessories/Accessories';
 import { Footer } from './Components/Footer';
-import phonesFromServer from './api/phones.json';
+import phones from './api/phones.json';
+import { Phone } from './Types/Phone';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,27 +19,25 @@ const App = () => {
     setIsMobileMenuOpen(prevState => !prevState);
   }, []);
 
-  // BrandNewModels >>>
-  // const getBrandNews = (itemCount: number, data: {}[]) => {
+  const getBrandNews = (itemCount: number): Phone[] => {
+    const sortByYear = phones.sort((phone1, phone2) => (
+      phone2.year - phone1.year));
 
-  // }
-  const numberOfBrandNews = 8;
-  const phonesByYear = phonesFromServer.sort((phone1, phone2) => (
-    phone2.year - phone1.year));
-  const brandNewList = phonesByYear.slice(0, numberOfBrandNews);
+    return sortByYear.slice(0, itemCount);
+  };
 
-  // Hotprices >>>
-  const numberOfDiscounted = 8;
-  const phonesByDiscount = phonesFromServer.sort((phone1, phone2) => {
-    const discountA = ((phone1.fullPrice - phone1.price)
-      / phone1.fullPrice) * 100;
-    const discountB = ((phone2.fullPrice - phone2.price)
-      / phone2.fullPrice) * 100;
+  const getHotPrices = (itemCount: number): Phone[] => {
+    const phonesByDiscount = phones.sort((phone1, phone2) => {
+      const discountA = ((phone1.fullPrice - phone1.price)
+        / phone1.fullPrice) * 100;
+      const discountB = ((phone2.fullPrice - phone2.price)
+        / phone2.fullPrice) * 100;
 
-    return discountB - discountA;
-  });
+      return discountB - discountA;
+    });
 
-  const hotPricesList = phonesByDiscount.slice(0, numberOfDiscounted);
+    return phonesByDiscount.slice(0, itemCount);
+  };
 
   return (
     <div className={cn(
@@ -59,18 +58,18 @@ const App = () => {
           path="/"
           element={(
             <Home
-              brandNews={brandNewList}
-              hotPrices={hotPricesList}
+              brandNews={getBrandNews(8)}
+              hotPrices={getHotPrices(10)}
             />
           )}
         />
         <Route
           path="/phones/:currentPage"
-          element={<Phones products={phonesFromServer} />}
+          element={<Phones products={phones} />}
         />
         <Route
           path="/phones/"
-          element={<Phones products={phonesFromServer} />}
+          element={<Phones products={phones} />}
         />
 
         <Route path="/tablets" element={<Tablets />} />
