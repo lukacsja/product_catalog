@@ -68,6 +68,7 @@
       &-disabled {
         background-image: url('../../../public/Icons/arrow_right-grey.svg');
         background-color: $color-surface1-grey;
+        background-size: 20%;
         pointer-events: none;
       }
     }

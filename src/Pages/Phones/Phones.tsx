@@ -6,18 +6,24 @@ import { Phone } from '../../Types/Phone';
 import './Phones.scss';
 import { Sortby } from '../../Types/Sortby';
 import { Pagination } from '../../Components/Pagination';
+import { PerPage } from '../../Types/PerPage';
 
 type Props = {
   products: Phone[],
 };
 
 export const Phones: React.FC<Props> = ({ products }) => {
-  const [perPage, setPerPage] = useState<number>(4);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const sortUrls = searchParams.get('sort') || Sortby.NEWEST;
-  const [sortby, setSortby] = useState<Sortby>(sortUrls as Sortby);
+  const perPageUrls = searchParams.get('perpage') || 'All';
+
   const [phones, setPhones] = useState<Phone[]>(products);
+  const [sortby, setSortby] = useState<Sortby>(sortUrls as Sortby);
+  const [perPage, setPerPage] = useState<PerPage>(perPageUrls as PerPage);
+
+  // eslint-disable-next-line no-console
+  console.log(perPage);
 
   const currentPage = Number(searchParams.get('page'));
   const navigate = useNavigate();
@@ -28,15 +34,28 @@ export const Phones: React.FC<Props> = ({ products }) => {
     }
 
     searchParams.set('sort', sortby);
+
+    searchParams.set('perpage', String(perPage));
+
     navigate(`?${searchParams.toString()}`);
-  }, [sortby]);
+  }, [sortby, perPage]);
 
   const getCurrentItems = () => {
-    const startIndex = (currentPage - 1) * perPage;
-    const endIndex = startIndex + perPage;
+    let startIndex;
+    let endIndex;
+
+    if (perPage === 'All') {
+      startIndex = (currentPage - 1) * phones.length;
+      endIndex = startIndex + phones.length;
+    } else {
+      startIndex = (currentPage - 1) * perPage;
+      endIndex = startIndex + perPage;
+    }
 
     return phones.slice(startIndex, endIndex);
   };
+
+  // isPaginationVisibe =
 
   // useEffect(() => {
   //   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -65,11 +84,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const handlePerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
 
-    if (selectedValue === 'All') {
-      setPerPage(phones.length);
-    } else {
-      setPerPage(Number(selectedValue));
-    }
+    setPerPage(Number(selectedValue) || 'All');
   };
 
   return (
@@ -121,6 +136,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
           <select
             className="phones__dropdown--select"
             name="sort-by"
+            value={perPage}
             onChange={handlePerPageChange}
           >
             <option

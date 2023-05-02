@@ -5,7 +5,7 @@ import './Pagination.scss';
 
 type Props = {
   totalItems: number,
-  itemsPerPage: number,
+  itemsPerPage: number | 'All',
   currentPage: number,
 };
 
@@ -14,7 +14,9 @@ export const Pagination: React.FC<Props> = ({
   itemsPerPage,
   currentPage,
 }) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = itemsPerPage === 'All'
+    ? 1
+    : Math.ceil(totalItems / itemsPerPage);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
