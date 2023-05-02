@@ -1,4 +1,3 @@
-/* eslint-disable padding-line-between-statements */
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Breadcrumbs } from '../../Components/Breadcrumbs';
@@ -16,8 +15,8 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const [perPage, setPerPage] = useState<number>(4);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const urls = searchParams.get('sort') || Sortby.NEWEST;
-  const [sortby, setSortby] = useState<Sortby>(urls as Sortby);
+  const sortUrls = searchParams.get('sort') || Sortby.NEWEST;
+  const [sortby, setSortby] = useState<Sortby>(sortUrls as Sortby);
   const [phones, setPhones] = useState<Phone[]>(products);
 
   const currentPage = Number(searchParams.get('page'));
@@ -27,14 +26,10 @@ export const Phones: React.FC<Props> = ({ products }) => {
     if (!currentPage) {
       searchParams.set('page', '1');
     }
+
     searchParams.set('sort', sortby);
     navigate(`?${searchParams.toString()}`);
   }, [sortby]);
-
-  // useEffect(() => {
-
-  //   navigate(`?${searchParams.toString()}`);
-  // }, [sortby]);
 
   const getCurrentItems = () => {
     const startIndex = (currentPage - 1) * perPage;
@@ -42,6 +37,10 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     return phones.slice(startIndex, endIndex);
   };
+
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }, [currentPage]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSort = event.target.value as Sortby;
@@ -61,23 +60,17 @@ export const Phones: React.FC<Props> = ({ products }) => {
     }
 
     setSortby(selectedSort);
-    // setCurrentPage(1);
   };
 
   const handlePerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
 
     if (selectedValue === 'All') {
-      setPerPage(products.length);
+      setPerPage(phones.length);
     } else {
       setPerPage(Number(selectedValue));
     }
   };
-
-  // useEffect(() => {
-  //   searchParams.set('page', String(currentPage));
-  //   window.history.replaceState(null, '', `${location.pathname}?${searchParams.toString()}`);
-  // }, [currentPage, location.pathname, searchParams]);
 
   return (
     <div className="phones">
@@ -162,14 +155,13 @@ export const Phones: React.FC<Props> = ({ products }) => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      {phones.length && (
+      {getCurrentItems().length && (
         <Pagination
           totalItems={products.length}
           itemsPerPage={perPage}
           currentPage={currentPage}
         />
       )}
-
     </div>
   );
 };
