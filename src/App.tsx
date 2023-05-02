@@ -55,6 +55,15 @@ const App = () => {
       />
       <Routes>
         <Route
+          path="*"
+          element={(
+            <Home
+              brandNews={getBrandNews(8)}
+              hotPrices={getHotPrices(10)}
+            />
+          )}
+        />
+        <Route
           path="/"
           element={(
             <Home
@@ -70,15 +79,6 @@ const App = () => {
 
         <Route path="/tablets" element={<Tablets />} />
         <Route path="/accessories" element={<Accessories />} />
-        <Route
-          path="*"
-          element={(
-            <Home
-              brandNews={getBrandNews(8)}
-              hotPrices={getHotPrices(10)}
-            />
-          )}
-        />
       </Routes>
       <Footer />
     </div>

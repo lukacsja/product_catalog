@@ -17,6 +17,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const searchParams = new URLSearchParams(location.search);
   const sortUrls = searchParams.get('sort') || Sortby.NEWEST;
   const perPageUrls = searchParams.get('perpage') || 'All';
+  const currentPageUrls = searchParams.get('page') || '1';
 
   const [phones, setPhones] = useState<Phone[]>(products);
   const [sortby, setSortby] = useState<Sortby>(sortUrls as Sortby);
@@ -25,28 +26,29 @@ export const Phones: React.FC<Props> = ({ products }) => {
   // eslint-disable-next-line no-console
   console.log(perPage);
 
-  const currentPage = Number(searchParams.get('page'));
+  const [currentPage, setCurrentPage] = useState<number>(
+    Number(currentPageUrls),
+  );
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!currentPage) {
-      searchParams.set('page', '1');
-    }
-
+    // Update search parameters
+    searchParams.set('page', String(currentPage));
+    searchParams.set('perpage', String(perPage));
     searchParams.set('sort', sortby);
 
-    searchParams.set('perpage', String(perPage));
-
+    // Update browser URL
     navigate(`?${searchParams.toString()}`);
-  }, [sortby, perPage]);
+  }, [sortby, perPage, currentPage]);
 
   const getCurrentItems = () => {
     let startIndex;
     let endIndex;
 
     if (perPage === 'All') {
-      startIndex = (currentPage - 1) * phones.length;
-      endIndex = startIndex + phones.length;
+      startIndex = 0;
+      endIndex = phones.length;
     } else {
       startIndex = (currentPage - 1) * perPage;
       endIndex = startIndex + perPage;
@@ -55,11 +57,13 @@ export const Phones: React.FC<Props> = ({ products }) => {
     return phones.slice(startIndex, endIndex);
   };
 
-  // isPaginationVisibe =
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(location.search);
 
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // }, [currentPage]);
+    setSortby(urlSearchParams.get('sort') as Sortby || Sortby.NEWEST);
+    setPerPage(urlSearchParams.get('perpage') as PerPage || 'All');
+    setCurrentPage(Number(urlSearchParams.get('page')) || 1);
+  }, [location.search]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSort = event.target.value as Sortby;
