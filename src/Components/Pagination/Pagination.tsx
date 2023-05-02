@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Pagination.scss';
 
@@ -14,9 +14,20 @@ export const Pagination: React.FC<Props> = ({
   itemsPerPage,
   currentPage,
 }) => {
-  const totalPages = itemsPerPage === 'All'
-    ? 1
-    : Math.ceil(totalItems / itemsPerPage);
+  const [totalPages, setTotalPages] = useState<number>(1);
+
+  useEffect(() => {
+    const calculateTotalPages = () => {
+      if (itemsPerPage === 'All') {
+        setTotalPages(1);
+      } else {
+        setTotalPages(Math.ceil(totalItems / itemsPerPage));
+      }
+    };
+
+    calculateTotalPages();
+  }, [totalItems, itemsPerPage]);
+
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 

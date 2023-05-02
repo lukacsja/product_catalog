@@ -17,30 +17,22 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const searchParams = new URLSearchParams(location.search);
   const sortUrls = searchParams.get('sort') || Sortby.NEWEST;
   const perPageUrls = searchParams.get('perpage') || 'All';
-  const currentPageUrls = searchParams.get('page') || '1';
 
   const [phones, setPhones] = useState<Phone[]>(products);
   const [sortby, setSortby] = useState<Sortby>(sortUrls as Sortby);
   const [perPage, setPerPage] = useState<PerPage>(perPageUrls as PerPage);
 
-  // eslint-disable-next-line no-console
-  console.log(perPage);
-
-  const [currentPage, setCurrentPage] = useState<number>(
-    Number(currentPageUrls),
-  );
-
+  const currentPage = Number(searchParams.get('page'));
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Update search parameters
-    searchParams.set('page', String(currentPage));
+    searchParams.set('page', '1');
+
     searchParams.set('perpage', String(perPage));
     searchParams.set('sort', sortby);
 
-    // Update browser URL
     navigate(`?${searchParams.toString()}`);
-  }, [sortby, perPage, currentPage]);
+  }, [sortby, perPage]);
 
   const getCurrentItems = () => {
     let startIndex;
@@ -51,7 +43,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
       endIndex = phones.length;
     } else {
       startIndex = (currentPage - 1) * perPage;
-      endIndex = startIndex + perPage;
+      endIndex = startIndex + Number(perPage);
     }
 
     return phones.slice(startIndex, endIndex);
@@ -62,7 +54,6 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     setSortby(urlSearchParams.get('sort') as Sortby || Sortby.NEWEST);
     setPerPage(urlSearchParams.get('perpage') as PerPage || 'All');
-    setCurrentPage(Number(urlSearchParams.get('page')) || 1);
   }, [location.search]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -88,14 +79,14 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const handlePerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = event.target.value;
 
-    setPerPage(Number(selectedValue) || 'All');
+    setPerPage(selectedValue as PerPage);
   };
 
   return (
     <div className="phones">
       <Breadcrumbs />
       <h1 className="phones__title">Mobile phones</h1>
-      <div className="phones__counter">{`${products?.length} models`}</div>
+      <div className="phones__counter">{`${products.length} models`}</div>
       <div className="phones__dropdowns">
         <div className="phones__dropdown">
           <label
@@ -175,13 +166,11 @@ export const Phones: React.FC<Props> = ({ products }) => {
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      {getCurrentItems().length && (
-        <Pagination
-          totalItems={products.length}
-          itemsPerPage={perPage}
-          currentPage={currentPage}
-        />
-      )}
+      <Pagination
+        totalItems={products.length}
+        itemsPerPage={perPage}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
