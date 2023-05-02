@@ -1,6 +1,6 @@
 export enum ItemsPerPage {
-  Four = '4',
-  Eight = '8',
-  Sixteen = '16',
-  All = 'all',
+  FOUR = '4',
+  EIGHT = '8',
+  SIXTEEN = '16',
+  ALL = 'all',
 }

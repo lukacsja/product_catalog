@@ -1,5 +1,5 @@
 export enum Sortby {
-  Newest = 'Newest',
-  Alphabet = 'Alphabetically',
-  Cheapest = 'Cheapest',
+  NEWEST = 'Newest',
+  ALPHABET = 'Alphabetically',
+  CHEAPEST = 'Cheapest',
 }

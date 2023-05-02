@@ -16,7 +16,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const [perPage, setPerPage] = useState<number>(4);
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const urls = searchParams.get('sort') || Sortby.Newest;
+  const urls = searchParams.get('sort') || Sortby.NEWEST;
   const [sortby, setSortby] = useState<Sortby>(urls as Sortby);
   const [phones, setPhones] = useState<Phone[]>(products);
 
@@ -40,20 +40,20 @@ export const Phones: React.FC<Props> = ({ products }) => {
     const startIndex = (currentPage - 1) * perPage;
     const endIndex = startIndex + perPage;
 
-    return phones?.slice(startIndex, endIndex);
+    return phones.slice(startIndex, endIndex);
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSort = event.target.value as Sortby;
 
     switch (selectedSort) {
-      case Sortby.Cheapest:
+      case Sortby.CHEAPEST:
         setPhones(phones.sort((a, b) => a.price - b.price));
         break;
-      case Sortby.Newest:
+      case Sortby.NEWEST:
         setPhones(phones.sort((a, b) => b.year - a.year));
         break;
-      case Sortby.Alphabet:
+      case Sortby.ALPHABET:
         setPhones(phones.sort((a, b) => a.name.localeCompare(b.name)));
         break;
       default:
@@ -65,9 +65,13 @@ export const Phones: React.FC<Props> = ({ products }) => {
   };
 
   const handlePerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = Number(event.target.value);
+    const selectedValue = event.target.value;
 
-    setPerPage(selectedValue);
+    if (selectedValue === 'All') {
+      setPerPage(products.length);
+    } else {
+      setPerPage(Number(selectedValue));
+    }
   };
 
   // useEffect(() => {
@@ -96,21 +100,21 @@ export const Phones: React.FC<Props> = ({ products }) => {
           >
             <option
               className="phones__dropdown--select-option"
-              value={Sortby.Newest}
+              value={Sortby.NEWEST}
             >
-              {Sortby.Newest}
+              {Sortby.NEWEST}
             </option>
             <option
               className="phones__dropdown--select-option"
-              value={Sortby.Alphabet}
+              value={Sortby.ALPHABET}
             >
-              {Sortby.Alphabet}
+              {Sortby.ALPHABET}
             </option>
             <option
               className="phones__dropdown--select-option"
-              value={Sortby.Cheapest}
+              value={Sortby.CHEAPEST}
             >
-              {Sortby.Cheapest}
+              {Sortby.CHEAPEST}
             </option>
           </select>
         </div>
