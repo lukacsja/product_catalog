@@ -11,6 +11,7 @@ import { Accessories } from './Pages/Accessories/Accessories';
 import { Footer } from './Components/Footer';
 import phones from './api/phones.json';
 import { Phone } from './Types/Phone';
+import { ProductDetails } from './Components/ProductDetails';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -38,6 +39,23 @@ const App = () => {
 
     return phonesByDiscount.slice(0, itemCount);
   };
+
+  // const colorMap = () => {
+  //   const result: string[] = [];
+
+  //   phones.map(phone => {
+  //     if (!result.includes(phone.color)) {
+  //       result.push(phone.color);
+  //     }
+
+  //     return null;
+  //   });
+
+  //   return result;
+  // };
+
+  // // eslint-disable-next-line no-console
+  // console.log(colorMap());
 
   return (
     <div className={cn(
@@ -75,6 +93,10 @@ const App = () => {
         <Route
           path="/phones"
           element={<Phones products={phones} />}
+        />
+        <Route
+          path="phones/:phoneId"
+          element={<ProductDetails />}
         />
 
         <Route path="/tablets" element={<Tablets />} />

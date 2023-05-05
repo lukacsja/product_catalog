@@ -14,7 +14,10 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     <div className="productcard__container">
       <div className="productcard">
         <div className="productcard__image--container">
-          <Link className="productcard__image--link" to="/">
+          <Link
+            className="productcard__image--link"
+            to={`/phones/${product.itemId}`}
+          >
             <img
               className="productcard__image"
               src={require(`../../${product.image}`)}
@@ -23,7 +26,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           </Link>
         </div>
         <Link
-          to="/"
+          to={`/phones/${product.itemId}`}
           className="productcard__title"
         >
           {product.name}

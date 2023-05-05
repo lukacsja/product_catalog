@@ -27,7 +27,6 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
   useEffect(() => {
     searchParams.set('page', '1');
-
     searchParams.set('perpage', String(perPage));
     searchParams.set('sort', sortby);
 
@@ -49,6 +48,9 @@ export const Phones: React.FC<Props> = ({ products }) => {
     return phones.slice(startIndex, endIndex);
   };
 
+  // eslint-disable-next-line no-console
+  console.log(sortby);
+
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(location.search);
 
@@ -61,13 +63,13 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     switch (selectedSort) {
       case Sortby.CHEAPEST:
-        setPhones(phones.sort((a, b) => a.price - b.price));
+        setPhones(products.sort((a, b) => a.price - b.price));
         break;
       case Sortby.NEWEST:
-        setPhones(phones.sort((a, b) => b.year - a.year));
+        setPhones(products.sort((a, b) => b.year - a.year));
         break;
       case Sortby.ALPHABET:
-        setPhones(phones.sort((a, b) => a.name.localeCompare(b.name)));
+        setPhones(products.sort((a, b) => a.name.localeCompare(b.name)));
         break;
       default:
         break;

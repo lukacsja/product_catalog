@@ -1,0 +1,261 @@
+@import '../../utils/colors.scss';
+@import '../../utils/mixins.scss';
+
+.details {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: $color-bg-grey-black;
+  padding: 24px 16px 64px 16px;
+
+  &__goback {
+    margin-top: 25px;
+
+    &--link {
+      text-decoration: none;
+      color: $color-white;
+    }
+  }
+
+  &__title {
+    margin-top: 16px;
+    @include font-h2-mobile;
+    color: $color-white;
+
+    @include onTablet {
+      @include font-h2-tablet-desktop;
+    }
+  }
+
+  &__images {
+    margin-top: 32px;
+
+    &--main {
+      &-img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+      }
+    }
+
+    &--list {
+      margin-top: 16px;
+      display: flex;
+      gap: 8px;
+
+      &-item {
+        outline: none;
+        border: none;
+        background-color: $color-bg-grey-black;
+
+        &.active {
+          border: 1px solid #C4C4C4;
+        }
+      }
+
+      &-img {
+        object-fit: contain;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+
+  &__colors {
+    margin-top: 40px;
+
+    &--title {
+      color: $color-secondary-grey;
+      @include font-smalltext-tablet-desktop;
+    }
+
+    &--palette {
+      margin-top: 8px;
+      display: flex;
+      gap: 10px;
+
+      &-item {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 2px solid $color-elements-grey;
+
+        &.active {
+          border: 2px solid $color-white;
+        }
+      }
+    }
+  }
+
+  &__separator {
+    margin-top: 24px;
+    border: 1px solid #3B3E4A;
+    width: 100%;
+  }
+
+  &__capacities {
+    margin-top: 40px;
+
+    &--title {
+      color: $color-secondary-grey;
+      @include font-smalltext-tablet-desktop;
+    }
+
+    &--palette {
+      margin-top: 8px;
+      display: flex;
+      gap: 10px;
+
+      &-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 32px;
+        text-decoration: none;
+
+        @include font-bodytext-tablet-desktop;
+        color: $color-white;
+        border: 1px solid #4A4D58;
+
+        &.active {
+          background-color: #fff;
+          color: $color-bg-grey-black;
+          border: none;
+        }
+      }
+    }
+  }
+
+  &__prices {
+    margin-top: 32px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    &-discount {
+      @include font-h2-tablet-desktop;
+      color: $color-white;
+    }
+
+    &-full {
+      @include font-h3-tablet-desktop;
+      font-weight: 600;
+      color: $color-secondary-grey;
+      text-decoration: line-through;
+    }
+  }
+
+  &__buttons {
+    margin-top: 16px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    width: 100%;
+  }
+
+  &__button {
+    height: 48px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background-color: $color-accent;
+
+    &--addtocart {
+      width: 100%;
+      color: $color-white;
+
+      @include onTablet {
+        width: 125px;
+      }
+
+      @include onDesktop {
+        width: 160px;
+      }
+
+      &:hover {
+        background-color: $color-accent-hover;
+      }
+
+      &:active {
+        background-color: $color-surface2-grey;
+      }
+    }
+
+    &--addtofavs {
+      min-width: 48px;
+      background-image: url('../../../public/Icons/favourites-heart-like.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: $color-surface2-grey;
+    }
+  }
+
+  &__info {
+    margin-top: 32px;
+    @include font-smalltext-tablet-desktop;
+
+    &--line {
+      margin-bottom: 8px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+
+    &--title {
+      color: $color-secondary-grey;
+    }
+
+    &--value {
+      color: $color-white;
+    }
+  }
+
+  &__about {
+    margin-top: 56px;
+
+    &--separator {
+      margin-top: 16px;
+      border: 1px solid #3B3E4A;
+      width: 100%;
+    }
+
+    &--title {
+      @include font-h3-mobile;
+      color: $color-white;
+    }
+
+    &--block {
+      margin-top: 32px;
+
+      &-title {
+        @include font-h4-mobile;
+        color: $color-white;
+      }
+
+      &-text {
+        margin-top: 16px;
+        @include font-bodytext-tablet-desktop;
+        color: $color-paragraph;
+        list-style: none;
+      }
+    }
+  }
+
+  &__specs {
+    margin-top: 56px;
+
+    &--title {
+      @include font-h3-mobile;
+      color: $color-white;
+    }
+  }
+}

@@ -52,7 +52,7 @@
     @include font-bodytext-tablet-desktop;
     color: $color-white;
     //TEMP >>>
-    font-size: 13px;
+    font-size: 14px;
     text-decoration: none;
     //temp >>>
     height: 42px;
@@ -68,6 +68,9 @@
 
   &__price {
     @include font-h3-tablet-desktop;
+
+    //temp>>
+    font-weight: 600;
 
     &--full {
       color: $color-white;
