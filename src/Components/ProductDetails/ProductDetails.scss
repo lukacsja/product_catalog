@@ -7,6 +7,32 @@
   background-color: $color-bg-grey-black;
   padding: 24px 16px 64px 16px;
 
+  &__mediagroup {
+    &--1 {
+      @include onTablet {
+        display: flex;
+        gap: 16px;
+      }
+
+      @include onDesktop {
+        gap: 120px;
+      }
+    }
+
+    &b {
+      @include onDesktop {
+        flex-basis: 50%;
+      }
+    }
+
+    &--2 {
+      @include onDesktop {
+        display: flex;
+        gap: 64px;
+      }
+    }
+  }
+
   &__goback {
     margin-top: 25px;
 
@@ -29,11 +55,18 @@
   &__images {
     margin-top: 32px;
 
+    @include onTablet {
+      display: flex;
+      flex-direction: row-reverse;
+    }
+
     &--main {
       &-img {
         width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: contain;
+        max-width: 442px;
+        max-height: 442px;
       }
     }
 
@@ -41,6 +74,10 @@
       margin-top: 16px;
       display: flex;
       gap: 8px;
+
+      @include onTablet {
+        flex-direction: column;
+      }
 
       &-item {
         outline: none;
@@ -222,6 +259,10 @@
   &__about {
     margin-top: 56px;
 
+    @include onDesktop {
+      flex-basis: 50%;
+    }
+
     &--separator {
       margin-top: 16px;
       border: 1px solid #3B3E4A;
@@ -252,6 +293,10 @@
 
   &__specs {
     margin-top: 56px;
+
+    @include onDesktop {
+      flex-basis: 50%;
+    }
 
     &--title {
       @include font-h3-mobile;

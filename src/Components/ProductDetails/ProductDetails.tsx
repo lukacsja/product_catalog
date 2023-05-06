@@ -108,7 +108,7 @@ export const ProductDetails: React.FC = () => {
               {details?.name}
             </h2>
 
-            <div className="media-flex-1">
+            <div className="details__mediagroup--1">
               <div className="details__images">
                 <div className="details__images--main">
                   <img
@@ -137,7 +137,7 @@ export const ProductDetails: React.FC = () => {
                   ))}
                 </div>
               </div>
-              <div className="media-flex-2">
+              <div className="details__mediagroup--1b">
                 <div className="details__colors">
                   <div className="details__colors--title">Available colors</div>
                   <div className="details__colors--palette">
@@ -232,7 +232,7 @@ export const ProductDetails: React.FC = () => {
               </div>
             </div>
 
-            <div className="media-flex-3">
+            <div className="details__mediagroup--2">
               <div className="details__about">
                 <h3 className="details__about--title">About</h3>
                 <div className="details__about--separator" />
