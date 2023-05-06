@@ -164,7 +164,11 @@ export const Phones: React.FC<Props> = ({ products }) => {
       </div>
       <div className="phones__list">
         {getCurrentItems()?.map(product => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            isDiscounted
+          />
         ))}
       </div>
       {products?.length && (

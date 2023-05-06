@@ -35,10 +35,10 @@ const App = () => {
 
   const getBrandNews = (itemCount: number): Phone[] | null => {
     if (phones) {
-      const sortByYear = phones.sort((phone1, phone2) => (
-        phone2.year - phone1.year));
+      const sortByPrice = phones.sort((phone1, phone2) => (
+        phone2.fullPrice - phone1.fullPrice));
 
-      return sortByYear.slice(0, itemCount);
+      return sortByPrice.slice(0, itemCount);
     }
 
     return null;

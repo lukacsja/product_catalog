@@ -7,9 +7,10 @@ import './ProductCard.scss';
 
 type Props = {
   product: Phone,
+  isDiscounted: boolean,
 };
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({ product, isDiscounted }) => {
   return (
     <div className="productcard__container">
       <div className="productcard">
@@ -32,12 +33,25 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           {product.name}
         </Link>
         <div className="productcard__prices">
-          <div className="productcard__price productcard__price--full">
-            {`$${product.price}`}
-          </div>
-          <div className="productcard__price productcard__price--discounted">
-            {`$${product.fullPrice}`}
-          </div>
+          {isDiscounted
+            ? (
+              <>
+                <div className="productcard__price productcard__price--full">
+                  {`$${product.price}`}
+                </div>
+                <div
+                  className="productcard__price productcard__price--discounted"
+                >
+                  {`$${product.fullPrice}`}
+                </div>
+              </>
+            )
+            : (
+              <div className="productcard__price productcard__price--full">
+                {`$${product.fullPrice}`}
+              </div>
+            )}
+
         </div>
         <div className="productcard__details">
           <div className="productcard__details--line">

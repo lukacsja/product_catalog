@@ -7,6 +7,7 @@ import './ProductCarousel.scss';
 type Props = {
   products: Phone[],
   title: string,
+  isDiscounted: boolean,
 };
 
 const gapSize = 16;
@@ -14,7 +15,11 @@ const mobileWidth = 212;
 const tabletWidth = 237;
 const desktopWidth = 272;
 
-export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
+export const ProductCarousel: React.FC<Props> = ({
+  products,
+  title,
+  isDiscounted,
+}) => {
   const [position, setPosition] = useState(0);
   const [cardWidth, setCardWidth] = useState(212);
   const [step, setStep] = useState(1);
@@ -100,6 +105,7 @@ export const ProductCarousel: React.FC<Props> = ({ products, title }) => {
             <ProductCard
               key={product.id}
               product={product}
+              isDiscounted={isDiscounted}
             />
           ))}
         </div>

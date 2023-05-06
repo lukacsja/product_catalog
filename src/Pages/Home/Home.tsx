@@ -16,11 +16,19 @@ export const Home: React.FC<Props> = ({ brandNews, hotPrices }) => (
     </div>
     <Banner />
     {brandNews && (
-      <ProductCarousel products={brandNews} title="Brand new models" />
+      <ProductCarousel
+        products={brandNews}
+        title="Brand new models"
+        isDiscounted={false}
+      />
     )}
     <Categories />
     {hotPrices && (
-      <ProductCarousel products={hotPrices} title="Hot prices" />
+      <ProductCarousel
+        products={hotPrices}
+        title="Hot prices"
+        isDiscounted
+      />
     )}
   </div>
 );
