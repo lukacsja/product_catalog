@@ -37,7 +37,7 @@ export const ProductDetails: React.FC = () => {
   };
 
   useEffect(() => {
-    fetch(`./product_catalog/api/phones/${phoneId}.json`, {
+    fetch(`./api/phones/${phoneId}.json`, {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
