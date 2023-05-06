@@ -51,10 +51,12 @@
     margin-top: 24px;
     @include font-bodytext-tablet-desktop;
     color: $color-white;
-    //TEMP >>>
-    font-size: 12px;
+    width: 100%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 14px;
     text-decoration: none;
-    //temp >>>
     height: 42px;
   }
 
