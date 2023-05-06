@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 import { Header } from './Components/Header';
@@ -9,53 +9,57 @@ import { Phones } from './Pages/Phones';
 import { Tablets } from './Pages/Tablets/Tablets';
 import { Accessories } from './Pages/Accessories/Accessories';
 import { Footer } from './Components/Footer';
-import phones from './api/phones.json';
 import { Phone } from './Types/Phone';
 import { ProductDetails } from './Components/ProductDetails';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [phones, setPhones] = useState<Phone[] | null>(null);
+
+  useEffect(() => {
+    fetch('./api/phones.json', {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setPhones(data);
+      });
+  }, []);
 
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(prevState => !prevState);
   }, []);
 
-  const getBrandNews = (itemCount: number): Phone[] => {
-    const sortByYear = phones.sort((phone1, phone2) => (
-      phone2.year - phone1.year));
+  const getBrandNews = (itemCount: number): Phone[] | null => {
+    if (phones) {
+      const sortByYear = phones.sort((phone1, phone2) => (
+        phone2.year - phone1.year));
 
-    return sortByYear.slice(0, itemCount);
+      return sortByYear.slice(0, itemCount);
+    }
+
+    return null;
   };
 
-  const getHotPrices = (itemCount: number): Phone[] => {
-    const phonesByDiscount = phones.sort((phone1, phone2) => {
-      const discountA = ((phone1.fullPrice - phone1.price)
-        / phone1.fullPrice) * 100;
-      const discountB = ((phone2.fullPrice - phone2.price)
-        / phone2.fullPrice) * 100;
+  const getHotPrices = (itemCount: number): Phone[] | null => {
+    if (phones) {
+      const phonesByDiscount = phones.sort((phone1, phone2) => {
+        const discountA = ((phone1.fullPrice - phone1.price)
+          / phone1.fullPrice) * 100;
+        const discountB = ((phone2.fullPrice - phone2.price)
+          / phone2.fullPrice) * 100;
 
-      return discountB - discountA;
-    });
+        return discountB - discountA;
+      });
 
-    return phonesByDiscount.slice(0, itemCount);
+      return phonesByDiscount.slice(0, itemCount);
+    }
+
+    return null;
   };
-
-  // const colorMap = () => {
-  //   const result: string[] = [];
-
-  //   phones.map(phone => {
-  //     if (!result.includes(phone.color)) {
-  //       result.push(phone.color);
-  //     }
-
-  //     return null;
-  //   });
-
-  //   return result;
-  // };
-
-  // // eslint-disable-next-line no-console
-  // console.log(colorMap());
 
   return (
     <div className={cn(

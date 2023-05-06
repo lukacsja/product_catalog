@@ -9,7 +9,7 @@ import { Pagination } from '../../Components/Pagination';
 import { PerPage } from '../../Types/PerPage';
 
 type Props = {
-  products: Phone[],
+  products: Phone[] | null,
 };
 
 export const Phones: React.FC<Props> = ({ products }) => {
@@ -18,7 +18,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
   const sortUrls = searchParams.get('sort') || Sortby.NEWEST;
   const perPageUrls = searchParams.get('perpage') || 'All';
 
-  const [phones, setPhones] = useState<Phone[]>(products);
+  const [phones, setPhones] = useState<Phone[] | null>(products);
   const [sortby, setSortby] = useState<Sortby>(sortUrls as Sortby);
   const [perPage, setPerPage] = useState<PerPage>(perPageUrls as PerPage);
 
@@ -39,17 +39,14 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     if (perPage === 'All') {
       startIndex = 0;
-      endIndex = phones.length;
+      endIndex = phones?.length;
     } else {
       startIndex = (currentPage - 1) * perPage;
       endIndex = startIndex + Number(perPage);
     }
 
-    return phones.slice(startIndex, endIndex);
+    return phones?.slice(startIndex, endIndex);
   };
-
-  // eslint-disable-next-line no-console
-  console.log(sortby);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(location.search);
@@ -63,13 +60,15 @@ export const Phones: React.FC<Props> = ({ products }) => {
 
     switch (selectedSort) {
       case Sortby.CHEAPEST:
-        setPhones(products.sort((a, b) => a.price - b.price));
+        setPhones(products?.sort((a, b) => a.price - b.price) ?? null);
         break;
       case Sortby.NEWEST:
-        setPhones(products.sort((a, b) => b.year - a.year));
+        setPhones(products?.sort((a, b) => b.year - a.year) ?? null);
         break;
       case Sortby.ALPHABET:
-        setPhones(products.sort((a, b) => a.name.localeCompare(b.name)));
+        setPhones(products?.sort(
+          (a, b) => a.name.localeCompare(b.name),
+        ) ?? null);
         break;
       default:
         break;
@@ -88,7 +87,7 @@ export const Phones: React.FC<Props> = ({ products }) => {
     <div className="phones">
       <Breadcrumbs />
       <h1 className="phones__title">Mobile phones</h1>
-      <div className="phones__counter">{`${products.length} models`}</div>
+      <div className="phones__counter">{`${products?.length} models`}</div>
       <div className="phones__dropdowns">
         <div className="phones__dropdown">
           <label
@@ -164,15 +163,17 @@ export const Phones: React.FC<Props> = ({ products }) => {
         </div>
       </div>
       <div className="phones__list">
-        {getCurrentItems().map(product => (
+        {getCurrentItems()?.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      <Pagination
-        totalItems={products.length}
-        itemsPerPage={perPage}
-        currentPage={currentPage}
-      />
+      {products?.length && (
+        <Pagination
+          totalItems={products?.length}
+          itemsPerPage={perPage}
+          currentPage={currentPage}
+        />
+      )}
     </div>
   );
 };

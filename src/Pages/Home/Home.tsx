@@ -5,8 +5,8 @@ import { Phone } from '../../Types/Phone';
 import './Home.scss';
 
 type Props = {
-  brandNews: Phone[],
-  hotPrices: Phone[],
+  brandNews: Phone[] | null,
+  hotPrices: Phone[] | null,
 };
 
 export const Home: React.FC<Props> = ({ brandNews, hotPrices }) => (
@@ -15,8 +15,12 @@ export const Home: React.FC<Props> = ({ brandNews, hotPrices }) => (
       <h1 className="home__title">Welcome to Nice Gadgets store!</h1>
     </div>
     <Banner />
-    <ProductCarousel products={brandNews} title="Brand new models" />
+    {brandNews && (
+      <ProductCarousel products={brandNews} title="Brand new models" />
+    )}
     <Categories />
-    <ProductCarousel products={hotPrices} title="Hot prices" />
+    {hotPrices && (
+      <ProductCarousel products={hotPrices} title="Hot prices" />
+    )}
   </div>
 );
