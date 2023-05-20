@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.5a70a122.css",
-    "main.js": "/product_catalog/static/js/main.21b6e2a0.js",
+    "main.css": "/product_catalog/static/css/main.34ab19c2.css",
+    "main.js": "/product_catalog/static/js/main.8720c5b8.js",
     "static/media/category-tablets.png": "/product_catalog/static/media/category-tablets.a1aff0fe1c1693fcea55.png",
     "static/media/category-phones.png": "/product_catalog/static/media/category-phones.9e913039f5c6a4866001.png",
     "static/media/banner-1-tablet_desktop.jpg": "/product_catalog/static/media/banner-1-tablet_desktop.5ee429b1dda9e78a56f6.jpg",
     "static/media/banner-1.jpg": "/product_catalog/static/media/banner-1.330ccefb220f2ef63b51.jpg",
-    "static/media/banner-phones.png": "/product_catalog/static/media/banner-phones.b4eeda8bd82b712057a2.png",
+    "static/media/banner-phones.png": "/product_catalog/static/media/banner-phones.21dffc9a28f50a7450ff.png",
     "static/media/category-accessories.png": "/product_catalog/static/media/category-accessories.ceac5a16c668432a34a0.png",
     "static/media/logo-nice-gadgets.svg": "/product_catalog/static/media/logo-nice-gadgets.eeb8da3fa7de6e2f3e7d.svg",
     "static/media/banner-tablets.png": "/product_catalog/static/media/banner-tablets.a962057c1043a08f7737.png",
+    "static/media/banner-accessories.png": "/product_catalog/static/media/banner-accessories.bdd2e0fca0159e52f41c.png",
     "static/media/01.jpg": "/product_catalog/static/media/01.0ef6a6762d9cdb256f60.jpg",
     "static/media/00.jpg": "/product_catalog/static/media/00.c41366d349d0ae9419a7.jpg",
     "static/media/03.jpg": "/product_catalog/static/media/03.60558962d469beaed756.jpg",
     "static/media/02.jpg": "/product_catalog/static/media/02.71bc1b0b908470672de0.jpg",
-    "static/media/banner-accessories.png": "/product_catalog/static/media/banner-accessories.bdd2e0fca0159e52f41c.png",
     "static/media/picthree.bdd2e0fc.png": "/product_catalog/static/media/picthree.bdd2e0fc.bdd2e0fca0159e52f41c.png",
     "static/media/banner-3.jpg": "/product_catalog/static/media/banner-3.14afcca7a1942d0b0c55.jpg",
     "static/media/banner-2.jpg": "/product_catalog/static/media/banner-2.adedf1dee90315bafe9c.jpg",
@@ -32,11 +32,11 @@
     "static/media/arrow_up-white.svg": "/product_catalog/static/media/arrow_up-white.e4fff257d28bda2ded41.svg",
     "static/media/arrow_right-grey.svg": "/product_catalog/static/media/arrow_right-grey.985360c2305523348313.svg",
     "static/media/arrow_down-grey.svg": "/product_catalog/static/media/arrow_down-grey.0a75b98d9165f32dc531.svg",
-    "main.5a70a122.css.map": "/product_catalog/static/css/main.5a70a122.css.map",
-    "main.21b6e2a0.js.map": "/product_catalog/static/js/main.21b6e2a0.js.map"
+    "main.34ab19c2.css.map": "/product_catalog/static/css/main.34ab19c2.css.map",
+    "main.8720c5b8.js.map": "/product_catalog/static/js/main.8720c5b8.js.map"
   },
   "entrypoints": [
-    "static/css/main.5a70a122.css",
-    "static/js/main.21b6e2a0.js"
+    "static/css/main.34ab19c2.css",
+    "static/js/main.8720c5b8.js"
   ]
 }
