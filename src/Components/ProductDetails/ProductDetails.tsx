@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
@@ -9,6 +7,7 @@ import { PhoneDetails } from '../../Types/PhoneDetails';
 import './ProductDetails.scss';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { Loader } from '../Loader';
+import { getProductColors } from '../../utils/_variables';
 
 export const ProductDetails: React.FC = () => {
   const [details, setDetails] = useState<PhoneDetails | null>(null);
@@ -16,27 +15,6 @@ export const ProductDetails: React.FC = () => {
   const [currentImage, setCurrentImage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { phoneId } = useParams();
-
-  const getProductColors = (color: string) => {
-    const customColors = [
-      { customColor: 'gold', cssColor: '#F9E5C9' },
-      { customColor: 'spacegray', cssColor: '#535150' },
-      { customColor: 'silver', cssColor: '#EBEBE3' },
-      { customColor: 'black', cssColor: '#1F2020' },
-      { customColor: 'rosegold', cssColor: '#FAD7BD' },
-      { customColor: 'white', cssColor: '#FFFFFF' },
-      { customColor: 'red', cssColor: '#BA0C2E' },
-      { customColor: 'yellow', cssColor: '#FFE681' },
-      { customColor: 'green', cssColor: '#AEE1CD' },
-      { customColor: 'purple', cssColor: '#B8AFE6' },
-      { customColor: 'midnightgreen', cssColor: '#4E5851' },
-      { customColor: 'coral', cssColor: '#EE7762' },
-    ];
-
-    const foundColor = customColors.find((item) => item.customColor === color);
-
-    return foundColor?.cssColor;
-  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -52,7 +30,9 @@ export const ProductDetails: React.FC = () => {
         setDetails(data);
       })
       .finally(() => {
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 600);
       });
   }, [phoneId]);
 
@@ -193,6 +173,7 @@ export const ProductDetails: React.FC = () => {
                   <button
                     type="button"
                     className="details__button details__button--addtofavs"
+                    aria-label="add to favourites"
                   />
                 </div>
                 <div className="details__info">

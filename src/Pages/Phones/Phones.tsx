@@ -51,8 +51,30 @@ export const Phones: React.FC<Props> = ({ products }) => {
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(location.search);
 
-    setSortby(urlSearchParams.get('sort') as Sortby || Sortby.NEWEST);
-    setPerPage(urlSearchParams.get('perpage') as PerPage || 'All');
+    const initialSortBy = urlSearchParams.get('sort') as Sortby
+      || Sortby.NEWEST;
+
+    setSortby(initialSortBy);
+
+    const initialPerPage = urlSearchParams.get('perpage') as PerPage || 'All';
+
+    setPerPage(initialPerPage);
+
+    switch (initialSortBy) {
+      case Sortby.CHEAPEST:
+        setPhones(products?.sort((a, b) => a.price - b.price) ?? null);
+        break;
+      case Sortby.NEWEST:
+        setPhones(products?.sort((a, b) => b.year - a.year) ?? null);
+        break;
+      case Sortby.ALPHABET:
+        setPhones(products?.sort(
+          (a, b) => a.name.localeCompare(b.name),
+        ) ?? null);
+        break;
+      default:
+        break;
+    }
   }, [location.search]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

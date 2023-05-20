@@ -13,7 +13,9 @@ export const Breadcrumbs = () => {
 
       return (
         <div className="crumb" key={crumb}>
-          <Link className="crumb-link" to={currentLink}>{crumb}</Link>
+          <Link className="crumb-link" to={currentLink}>
+            {crumb.split('-').join(' ')}
+          </Link>
         </div>
       );
     });
