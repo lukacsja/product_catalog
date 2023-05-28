@@ -4,6 +4,7 @@ import React from 'react';
 import './Header.scss';
 import { NavLink } from 'react-router-dom';
 import { navItems } from '../../utils/_variables';
+import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 type Props = {
   isMobileMenuOpen: boolean,
@@ -14,6 +15,8 @@ export const Header: React.FC<Props> = ({
   isMobileMenuOpen,
   toggleMobileMenu,
 }) => {
+  const { cartItems } = useShoppingCart();
+
   return (
     <div className="header">
       <div className="navbar">
@@ -45,28 +48,43 @@ export const Header: React.FC<Props> = ({
           ))}
         </ul>
         <div className="navbar__icons">
-          <div className="navbar__icon navbar__icon--hide">
-            <button
-              type="button"
+          <button
+            className="navbar__icon navbar__icon--mobile"
+            type="button"
+            onClick={toggleMobileMenu}
+          >
+            <div
               className={`navbar__icon--${isMobileMenuOpen
                 ? 'close'
                 : 'hamburger'}-svg`}
-              onClick={toggleMobileMenu}
             />
-          </div>
+          </button>
 
-          <div className="navbar__icon navbar__icon--favourites">
-            <NavLink
-              className="navbar__icon--favourites-svg"
-              to="/mobile-icon"
-            />
-          </div>
-          <div className="navbar__icon navbar__icon--cart">
-            <NavLink
-              className="navbar__icon--cart-svg"
-              to="/shoppingcart"
-            />
-          </div>
+          <NavLink
+            className={({ isActive }) => cn(
+              'navbar__icon navbar__icon--favourites',
+              { 'is-active': isActive },
+            )}
+            to="/favorites"
+          >
+            <div className="navbar__icon--favourites-svg">
+              <div className="navbar__icon--counter">0</div>
+            </div>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => cn(
+              'navbar__icon navbar__icon--cart',
+              { 'is-active': isActive },
+            )}
+            to="/shoppingcart"
+          >
+            <div className="navbar__icon--cart-svg">
+              <div className="navbar__icon--counter">
+                {cartItems.length}
+              </div>
+            </div>
+
+          </NavLink>
         </div>
       </div>
     </div>
