@@ -41,7 +41,8 @@ export const MobileMenu: React.FC<Props> = ({
         <div className="menu__icon menu__icon--cart">
           <Link
             className="menu__icon--cart-svg"
-            to="/mobile-icon"
+            to="/shoppingcart"
+            onClick={toggleMobileMenu}
           />
         </div>
       </div>

@@ -64,7 +64,7 @@ export const Header: React.FC<Props> = ({
           <div className="navbar__icon navbar__icon--cart">
             <NavLink
               className="navbar__icon--cart-svg"
-              to="/mobile-icon"
+              to="/shoppingcart"
             />
           </div>
         </div>

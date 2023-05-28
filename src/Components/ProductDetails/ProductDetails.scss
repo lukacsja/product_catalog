@@ -36,9 +36,22 @@
   &__goback {
     margin-top: 25px;
 
+    @include onTablet {
+      margin-top: 40px;
+    }
+
     &--link {
+      @include font-smalltext-tablet-desktop;
       text-decoration: none;
       color: $color-white;
+
+      &::before {
+        content: '';
+        padding-right: 20px;
+        background-image: url('../../../public/Icons/arrow_left-white.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
     }
   }
 

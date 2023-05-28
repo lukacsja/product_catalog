@@ -1,9 +1,9 @@
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Link } from 'react-router-dom';
 import { Phone } from '../../Types/Phone';
 import './ProductCard.scss';
+import { useShoppingCart } from '../../context/ShoppingCartContext';
 
 type Props = {
   product: Phone,
@@ -11,6 +11,8 @@ type Props = {
 };
 
 export const ProductCard: React.FC<Props> = ({ product, isDiscounted }) => {
+  const { addToCart } = useShoppingCart();
+
   return (
     <div className="productcard__container">
       <div className="productcard">
@@ -83,12 +85,14 @@ export const ProductCard: React.FC<Props> = ({ product, isDiscounted }) => {
           <button
             type="button"
             className="productcard__button productcard__button--addtocart"
+            onClick={() => addToCart(product)}
           >
             Add to cart
           </button>
           <button
             type="button"
             className="productcard__button productcard__button--addtofavs"
+            aria-label="add to favourites"
           />
         </div>
       </div>

@@ -1,0 +1,230 @@
+@import '../../utils/colors';
+@import '../../utils/mixins';
+
+.shoppingcart {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: $color-bg-grey-black;
+  padding: 24px 16px 64px 16px;
+
+  @include onTablet {
+    padding: 24px 24px 64px 24px;
+  }
+
+  @include onDesktop {
+    padding: 24px 32px 80px 32px;
+  }
+
+  &__panels {
+    @include onDesktop {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+  }
+
+  &__goback {
+    // margin-top: 25px;
+
+    // @include onTablet {
+    //   margin-top: 40px;
+    // }
+
+    &--link {
+      @include font-smalltext-tablet-desktop;
+      text-decoration: none;
+      color: $color-white;
+
+      &::before {
+        content: '';
+        padding-right: 20px;
+        background-image: url('../../../public/Icons/arrow_left-white.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+
+  &__title {
+    margin-top: 24px;
+
+    @include font-h1-mobile;
+    color: $color-white;
+
+    @include onTablet {
+      margin-top: 16px;
+      @include font-h1-tablet-desktop
+    }
+  }
+
+  &__items {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include onDesktop {
+      flex: 2;
+    }
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    width: 100%;
+    height: 100%;
+    background-color: $color-surface1-grey;
+
+    @include onTablet {
+      padding: 24px;
+      gap: 24px;
+    }
+
+    @include onTablet {
+      flex-direction: row;
+    }
+
+    &--first-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      @include onTablet {
+        gap: 24px;
+        justify-content: center;
+        flex: 2;
+      }
+    }
+
+    &--second-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+
+      @include onTablet {
+        gap: 24px;
+        flex: 1;
+      }
+    }
+
+    &--remove {
+      width: 10px;
+      height: 10px;
+      background-image: url('../../../public/Icons/cross-grey.svg');
+      border: none;
+      outline: none;
+      background-color: inherit;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &--container {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &--img {
+      height: 66px;
+    }
+
+    &--title {
+      @include font-bodytext-tablet-desktop;
+      color: $color-white;
+    }
+
+    &--manage-quantities {
+      display: flex;
+    }
+
+    &--minus {
+      border: 1px solid $color-elements-grey;
+      height: 32px;
+      width: 32px;
+      background-image: url('../../../public/Icons/minus.svg');
+      background-color: inherit;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &--quantity {
+      display: flex;
+      height: 32px;
+      width: 32px;
+      @include font-bodytext-tablet-desktop;
+      color: $color-white;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &--plus {
+      border: 1px solid $color-elements-grey;
+      height: 32px;
+      width: 32px;
+      background-image: url('../../../public/Icons/Plus.svg');
+      background-color: inherit;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &--price {
+      @include font-h3-tablet-desktop;
+      color: $color-white;
+    }
+  }
+
+  &__total {
+    margin-top: 32px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $color-elements-grey;
+    width: 100%;
+
+    @include onTablet {
+      flex: 1;
+      height: 100%;
+    }
+
+    &--price {
+      @include font-h2-tablet-desktop;
+      color: $color-white;
+    }
+
+    &--info {
+      @include font-bodytext-tablet-desktop;
+      color: $color-elements-grey;
+
+      border-bottom: 1px solid $color-elements-grey;
+      padding-bottom: 16px;
+      flex-grow: 1;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+
+    &--checkout {
+      @include font-buttons-tablet-desktop;
+      color: $color-white;
+      margin-top: 16px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      background-color: $color-accent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 48px;
+    }
+  }
+}
