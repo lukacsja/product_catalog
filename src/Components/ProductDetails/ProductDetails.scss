@@ -5,7 +5,18 @@
   max-width: 1200px;
   margin: 0 auto;
   background-color: $color-bg-grey-black;
-  padding: 24px 16px 64px 16px;
+  padding: 24px 16px 56px 16px;
+  min-height: calc(100vh - 255px - 48px);
+
+  @include onTablet {
+    min-height: calc(100vh - 96px - 48px);
+    padding: 24px 24px 64px 24px;
+  }
+
+  @include onDesktop {
+    min-height: calc(100vh - 96px - 64px);
+    padding: 24px 32px 80px 32px;
+  }
 
   &__mediagroup {
     &--1 {
