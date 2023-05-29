@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { Link } from 'react-router-dom';
 import './Footer.scss';
 
@@ -32,6 +31,7 @@ export const Footer = () => {
           type="button"
           className="footer__backtotop--button"
           onClick={scrollToTop}
+          aria-label="go back to top"
         />
       </div>
     </div>

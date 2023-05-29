@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
 import './Banner.scss';
@@ -61,7 +60,6 @@ export const Banner: React.FC = () => {
     <div className="banner__container">
       <div className="banner">
         <div className="banner__slideshow">
-          {/* <div className=".banner__arrow banner__arrow--left" /> */}
           <div {...swipeHandlers}>
             <div
               className="banner__item"
@@ -81,7 +79,6 @@ export const Banner: React.FC = () => {
               ))}
             </div>
           </div>
-          {/* <div className=".banner__arrow banner__arrow--right" /> */}
         </div>
         <div className="banner__buttons">
           {images.map((image, imageIndex) => (
@@ -95,6 +92,7 @@ export const Banner: React.FC = () => {
               onClick={() => {
                 setIndex(imageIndex);
               }}
+              aria-label="choose an image"
             />
           ))}
         </div>
