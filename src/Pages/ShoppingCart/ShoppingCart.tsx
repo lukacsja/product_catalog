@@ -87,7 +87,6 @@ export const ShoppingCart = () => {
               </div>
             </div>
           </>
-
         )
         : (
           <h1 className="shoppingcart__title">Your cart is empty</h1>
