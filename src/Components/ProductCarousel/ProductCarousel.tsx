@@ -35,7 +35,7 @@ export const ProductCarousel: React.FC<Props> = ({
 
   const handleSlideLeft = () => {
     setPosition(
-      Math.max(position - step * (cardWidth - gapSize), 0),
+      Math.max(position - step * (cardWidth + gapSize), 0),
     );
   };
 
