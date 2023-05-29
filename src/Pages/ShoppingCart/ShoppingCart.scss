@@ -97,7 +97,7 @@
       @include onTablet {
         gap: 24px;
         justify-content: center;
-        flex: 2;
+        flex: 1;
       }
     }
 
@@ -140,6 +140,7 @@
     &--title {
       @include font-bodytext-tablet-desktop;
       color: $color-white;
+      max-width: 200px;
     }
 
     &--manage-quantities {

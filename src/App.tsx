@@ -14,6 +14,8 @@ import { ProductDetails } from './Components/ProductDetails';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ShoppingCart } from './Pages/ShoppingCart';
 import { PageNotFound } from './Pages/PageNotFound';
+import { FavoritesProvider } from './context/FavoritesContext';
+import { Favorites } from './Pages/Favorites';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -66,51 +68,51 @@ const App = () => {
 
   return (
     <ShoppingCartProvider>
-      <div className={cn(
-        'App',
-        { 'disable-scroll': isMobileMenuOpen },
-      )}
-      >
-        <Header
-          isMobileMenuOpen={isMobileMenuOpen}
-          toggleMobileMenu={toggleMobileMenu}
-        />
-        <MobileMenu
-          isMobileMenuOpen={isMobileMenuOpen}
-          toggleMobileMenu={toggleMobileMenu}
-        />
-        <Routes>
-          <Route
-            path="*"
-            element={(<PageNotFound />)}
+      <FavoritesProvider>
+        <div className={cn(
+          'App',
+          { 'disable-scroll': isMobileMenuOpen },
+        )}
+        >
+          <Header
+            isMobileMenuOpen={isMobileMenuOpen}
+            toggleMobileMenu={toggleMobileMenu}
           />
-          <Route
-            path="/"
-            element={(
-              <Home
-                brandNews={getBrandNews(8)}
-                hotPrices={getHotPrices(10)}
-              />
-            )}
+          <MobileMenu
+            isMobileMenuOpen={isMobileMenuOpen}
+            toggleMobileMenu={toggleMobileMenu}
           />
-          <Route
-            path="/phones"
-            element={<Phones products={phones} />}
-          />
-          <Route
-            path="phones/:phoneId"
-            element={<ProductDetails />}
-          />
+          <Routes>
+            <Route
+              path="*"
+              element={(<PageNotFound />)}
+            />
+            <Route
+              path="/"
+              element={(
+                <Home
+                  brandNews={getBrandNews(8)}
+                  hotPrices={getHotPrices(10)}
+                />
+              )}
+            />
+            <Route
+              path="/phones"
+              element={<Phones products={phones} />}
+            />
+            <Route
+              path="phones/:phoneId"
+              element={phones ? <ProductDetails phones={phones} /> : null}
+            />
 
-          <Route path="/tablets" element={<Tablets />} />
-          <Route path="/accessories" element={<Accessories />} />
-          <Route
-            path="/shoppingcart"
-            element={<ShoppingCart />}
-          />
-        </Routes>
-        <Footer />
-      </div>
+            <Route path="/tablets" element={<Tablets />} />
+            <Route path="/accessories" element={<Accessories />} />
+            <Route path="/favorites" element={<Favorites />} />
+            <Route path="/shoppingcart" element={<ShoppingCart />} />
+          </Routes>
+          <Footer />
+        </div>
+      </FavoritesProvider>
     </ShoppingCartProvider>
   );
 };

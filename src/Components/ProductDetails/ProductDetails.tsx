@@ -8,13 +8,29 @@ import './ProductDetails.scss';
 import { Breadcrumbs } from '../Breadcrumbs';
 import { Loader } from '../Loader';
 import { getProductColors } from '../../utils/_variables';
+import { Phone } from '../../Types/Phone';
+import { useShoppingCart } from '../../context/ShoppingCartContext';
+import { useFavorites } from '../../context/FavoritesContext';
 
-export const ProductDetails: React.FC = () => {
+type Props = {
+  phones: Phone[],
+};
+
+export const ProductDetails: React.FC<Props> = ({ phones }) => {
   const [details, setDetails] = useState<PhoneDetails | null>(null);
   const [images, setImages] = useState(details?.images);
   const [currentImage, setCurrentImage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPhone, setCurrentPhone] = useState<Phone | null>(null);
   const { phoneId } = useParams();
+  const { addToCart } = useShoppingCart();
+  const { favorites, addToFavs, removeFromFavs } = useFavorites();
+
+  const getPhoneById = (id: string): Phone | null => {
+    const phone = phones.find(item => item.phoneId === id);
+
+    return phone || null;
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -34,6 +50,10 @@ export const ProductDetails: React.FC = () => {
           setIsLoading(false);
         }, 600);
       });
+
+    if (phoneId) {
+      setCurrentPhone(getPhoneById(phoneId));
+    }
   }, [phoneId]);
 
   useEffect(() => {
@@ -167,14 +187,31 @@ export const ProductDetails: React.FC = () => {
                   <button
                     type="button"
                     className="details__button details__button--addtocart"
+                    onClick={() => currentPhone && addToCart(currentPhone)}
                   >
                     Add to cart
                   </button>
-                  <button
-                    type="button"
-                    className="details__button details__button--addtofavs"
-                    aria-label="add to favourites"
-                  />
+                  {currentPhone && favorites.includes(currentPhone)
+                    ? (
+                      <button
+                        type="button"
+                        className="details__button
+                        details__button--removefromfavs"
+                        aria-label="remove from favrites"
+                        onClick={() => currentPhone
+                          && removeFromFavs(currentPhone)}
+                      />
+                    )
+                    : (
+                      <button
+                        type="button"
+                        className="details__button
+                        details__button--addtofavs"
+                        aria-label="add to favorites"
+                        onClick={() => currentPhone
+                          && addToFavs(currentPhone)}
+                      />
+                    )}
                 </div>
                 <div className="details__info">
                   <div className="details__info--line">
@@ -314,7 +351,6 @@ export const ProductDetails: React.FC = () => {
             {/* <ProductCarousel products={}/> */}
           </>
         )}
-
     </div>
   );
 };

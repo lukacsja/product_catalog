@@ -155,5 +155,14 @@
       background-position: center;
       background-color: $color-surface2-grey;
     }
+
+    &--removefromfavs {
+      width: 40px;
+      background-image: url('../../../public/Icons/favourites-heart-like-filled.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: inherit;
+      border: 1px solid $color-elements-grey;
+    }
   }
 }

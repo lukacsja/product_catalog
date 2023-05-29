@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Phone } from '../../Types/Phone';
 import './ProductCard.scss';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
+import { useFavorites } from '../../context/FavoritesContext';
 
 type Props = {
   product: Phone,
@@ -12,6 +13,7 @@ type Props = {
 
 export const ProductCard: React.FC<Props> = ({ product, isDiscounted }) => {
   const { addToCart } = useShoppingCart();
+  const { favorites, addToFavs, removeFromFavs } = useFavorites();
 
   return (
     <div className="productcard__container">
@@ -89,11 +91,24 @@ export const ProductCard: React.FC<Props> = ({ product, isDiscounted }) => {
           >
             Add to cart
           </button>
-          <button
-            type="button"
-            className="productcard__button productcard__button--addtofavs"
-            aria-label="add to favourites"
-          />
+          {favorites.includes(product)
+            ? (
+              <button
+                type="button"
+                className="productcard__button
+                productcard__button--removefromfavs"
+                aria-label="remove from favorites"
+                onClick={() => removeFromFavs(product)}
+              />
+            )
+            : (
+              <button
+                type="button"
+                className="productcard__button productcard__button--addtofavs"
+                aria-label="add to favorites"
+                onClick={() => addToFavs(product)}
+              />
+            )}
         </div>
       </div>
     </div>

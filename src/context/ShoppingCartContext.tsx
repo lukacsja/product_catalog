@@ -3,11 +3,11 @@ import {
 } from 'react';
 import { Phone } from '../Types/Phone';
 
-type ShoppintCartProviderProps = {
+type ShoppingCartProviderProps = {
   children: ReactNode,
 };
 
-type ShoppingCardContext = {
+type ShoppingCartContextType = {
   addToCart: (product: Phone) => void,
   getItemQuantity: (product: Phone) => void,
   decreaseCartQuantity: (product: Phone) => void,
@@ -15,13 +15,13 @@ type ShoppingCardContext = {
   cartItems: Phone[],
 };
 
-const ShoppingCartContext = createContext({} as ShoppingCardContext);
+const ShoppingCartContext = createContext({} as ShoppingCartContextType);
 
 export const useShoppingCart = () => {
   return useContext(ShoppingCartContext);
 };
 
-export const ShoppingCartProvider: React.FC<ShoppintCartProviderProps> = (
+export const ShoppingCartProvider: React.FC<ShoppingCartProviderProps> = (
   { children },
 ) => {
   const [cartItems, setCartItems] = useState<Phone[]>([]);

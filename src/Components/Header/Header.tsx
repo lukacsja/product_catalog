@@ -5,6 +5,7 @@ import './Header.scss';
 import { NavLink } from 'react-router-dom';
 import { navItems } from '../../utils/_variables';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
+import { useFavorites } from '../../context/FavoritesContext';
 
 type Props = {
   isMobileMenuOpen: boolean,
@@ -16,6 +17,7 @@ export const Header: React.FC<Props> = ({
   toggleMobileMenu,
 }) => {
   const { cartItems } = useShoppingCart();
+  const { favorites } = useFavorites();
 
   return (
     <div className="header">
@@ -68,7 +70,9 @@ export const Header: React.FC<Props> = ({
             to="/favorites"
           >
             <div className="navbar__icon--favourites-svg">
-              <div className="navbar__icon--counter">0</div>
+              <div className="navbar__icon--counter">
+                {favorites.length}
+              </div>
             </div>
           </NavLink>
           <NavLink
