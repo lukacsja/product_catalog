@@ -1,7 +1,9 @@
+import { Breadcrumbs } from '../../Components/Breadcrumbs';
 import './Accessories.scss';
 
 export const Accessories = () => (
   <div className="accessories">
-    <h1 style={{ color: 'white' }}>Accessories</h1>
+    <Breadcrumbs />
+    <h1 className="accessories__title">There are no accessories yet</h1>
   </div>
 );

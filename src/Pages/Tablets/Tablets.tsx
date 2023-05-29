@@ -1,3 +1,9 @@
+import { Breadcrumbs } from '../../Components/Breadcrumbs';
+import './Tablets.scss';
+
 export const Tablets = () => (
-  <h1 style={{ color: 'white' }}>Tablets</h1>
+  <div className="tablets">
+    <Breadcrumbs />
+    <h1 className="tablets__title">There are no tablets yet</h1>
+  </div>
 );
