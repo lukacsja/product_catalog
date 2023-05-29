@@ -11,9 +11,9 @@ type Props = {
 };
 
 const gapSize = 16;
-const mobileWidth = 212;
-const tabletWidth = 237;
-const desktopWidth = 272;
+// const mobileWidth = 212;
+// const tabletWidth = 237;
+// const desktopWidth = 272;
 
 export const ProductCarousel: React.FC<Props> = ({
   products,
@@ -21,17 +21,18 @@ export const ProductCarousel: React.FC<Props> = ({
   isDiscounted,
 }) => {
   const [position, setPosition] = useState(0);
-  const [cardWidth, setCardWidth] = useState(212);
   const [step, setStep] = useState(1);
+
+  const productCardsRef = useRef<HTMLDivElement>(null);
+  const productCardRef = useRef<HTMLDivElement>(null);
+
+  const containerWidth = productCardsRef.current?.clientWidth ?? 0;
+  const cardWidth = productCardRef.current?.clientWidth ?? 0;
 
   const productsWidth = (products.length * cardWidth)
     + ((products.length - 1) * gapSize);
 
-  const productCardsRef = useRef<HTMLDivElement>(null);
-
-  const refWidth = productCardsRef.current?.clientWidth ?? 0;
-
-  const maxPosition = productsWidth - refWidth;
+  const maxPosition = productsWidth - containerWidth;
 
   const handleSlideLeft = () => {
     setPosition(
@@ -54,17 +55,14 @@ export const ProductCarousel: React.FC<Props> = ({
   useEffect(() => {
     function handleResize() {
       if (window.innerWidth >= 1200) {
-        setCardWidth(desktopWidth);
         setStep(4);
       }
 
       if (window.innerWidth < 1200) {
-        setCardWidth(tabletWidth);
         setStep(2);
       }
 
       if (window.innerWidth < 640) {
-        setCardWidth(mobileWidth);
         setStep(1);
       }
 
@@ -102,11 +100,16 @@ export const ProductCarousel: React.FC<Props> = ({
         </div>
         <div className="carousel__productcards" ref={productCardsRef}>
           {products.map(product => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              isDiscounted={isDiscounted}
-            />
+            <div
+              className="carousel__productcard--container"
+              ref={productCardRef}
+            >
+              <ProductCard
+                key={product.id}
+                product={product}
+                isDiscounted={isDiscounted}
+              />
+            </div>
           ))}
         </div>
       </div>
