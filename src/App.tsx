@@ -13,6 +13,7 @@ import { Phone } from './Types/Phone';
 import { ProductDetails } from './Components/ProductDetails';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import { ShoppingCart } from './Pages/ShoppingCart';
+import { PageNotFound } from './Pages/PageNotFound';
 
 const App = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -81,12 +82,7 @@ const App = () => {
         <Routes>
           <Route
             path="*"
-            element={(
-              <Home
-                brandNews={getBrandNews(8)}
-                hotPrices={getHotPrices(10)}
-              />
-            )}
+            element={(<PageNotFound />)}
           />
           <Route
             path="/"
