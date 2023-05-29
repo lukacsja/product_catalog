@@ -39,13 +39,13 @@
   &__items {
     margin-top: 32px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 212px);
+    grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
     column-gap: 16px;
     row-gap: 40px;
     justify-content: center;
 
     @include onTablet {
-      grid-template-columns: repeat(auto-fill, 237px, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
     }
 
     @include onTablet {

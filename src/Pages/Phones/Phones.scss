@@ -96,13 +96,13 @@
   &__list {
     margin-top: 24px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 212px);
+    grid-template-columns: repeat(auto-fill, minmax(212px, 1fr));
     column-gap: 16px;
     row-gap: 40px;
     justify-content: center;
 
     @include onTablet {
-      grid-template-columns: repeat(auto-fill, 237px, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
     }
 
     @include onTablet {
@@ -125,10 +125,6 @@
   &__numbers {
     display: flex;
     gap: 8px;
-    // width: 150px;
-    // text-overflow: ellipsis;
-    // overflow: hidden;
-    // white-space: nowrap;
   }
 
   &__link {

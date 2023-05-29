@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useRef, useState } from 'react';
 import { Phone } from '../../Types/Phone';
 import { ProductCard } from '../ProductCard';
@@ -9,11 +8,6 @@ type Props = {
   title: string,
   isDiscounted: boolean,
 };
-
-const gapSize = 16;
-// const mobileWidth = 212;
-// const tabletWidth = 237;
-// const desktopWidth = 272;
 
 export const ProductCarousel: React.FC<Props> = ({
   products,
@@ -28,6 +22,8 @@ export const ProductCarousel: React.FC<Props> = ({
 
   const containerWidth = productCardsRef.current?.clientWidth ?? 0;
   const cardWidth = productCardRef.current?.clientWidth ?? 0;
+
+  const gapSize = 16;
 
   const productsWidth = (products.length * cardWidth)
     + ((products.length - 1) * gapSize);
@@ -89,12 +85,14 @@ export const ProductCarousel: React.FC<Props> = ({
               className="carousel__title--button carousel__title--button-left"
               onClick={handleSlideLeft}
               disabled={position === 0}
+              aria-label="scroll forward"
             />
             <button
               type="button"
               className="carousel__title--button carousel__title--button-right"
               onClick={handleSlideRight}
               disabled={position === maxPosition}
+              aria-label="scroll back"
             />
           </div>
         </div>
