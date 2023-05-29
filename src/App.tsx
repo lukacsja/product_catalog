@@ -66,6 +66,31 @@ const App = () => {
     return null;
   };
 
+  const getRandomProducts = (itemCount: number): Phone[] | null => {
+    const result: Phone[] = [];
+
+    if (phones) {
+      const { length } = phones;
+
+      if (itemCount >= length) {
+        return phones.sort(() => Math.random() - 0.5);
+      }
+
+      while (result.length < itemCount) {
+        const randomIndex = Math.floor(Math.random() * length);
+        const randomItem = phones[randomIndex];
+
+        if (!result.includes(randomItem)) {
+          result.push(randomItem);
+        }
+      }
+
+      return result;
+    }
+
+    return null;
+  };
+
   return (
     <ShoppingCartProvider>
       <FavoritesProvider>
@@ -102,7 +127,12 @@ const App = () => {
             />
             <Route
               path="phones/:phoneId"
-              element={phones ? <ProductDetails phones={phones} /> : null}
+              element={phones ? (
+                <ProductDetails
+                  phones={phones}
+                  randomProducts={getRandomProducts(9)}
+                />
+              ) : null}
             />
 
             <Route path="/tablets" element={<Tablets />} />

@@ -11,12 +11,17 @@ import { getProductColors } from '../../utils/_variables';
 import { Phone } from '../../Types/Phone';
 import { useShoppingCart } from '../../context/ShoppingCartContext';
 import { useFavorites } from '../../context/FavoritesContext';
+import { ProductCarousel } from '../ProductCarousel';
 
 type Props = {
   phones: Phone[],
+  randomProducts: Phone[] | null;
 };
 
-export const ProductDetails: React.FC<Props> = ({ phones }) => {
+export const ProductDetails: React.FC<Props> = ({
+  phones,
+  randomProducts,
+}) => {
   const [details, setDetails] = useState<PhoneDetails | null>(null);
   const [images, setImages] = useState(details?.images);
   const [currentImage, setCurrentImage] = useState('');
@@ -348,7 +353,13 @@ export const ProductDetails: React.FC<Props> = ({ phones }) => {
                 </div>
               </div>
             </div>
-            {/* <ProductCarousel products={}/> */}
+            {randomProducts && (
+              <ProductCarousel
+                title="You may also like"
+                products={randomProducts}
+                isDiscounted
+              />
+            )}
           </>
         )}
     </div>
