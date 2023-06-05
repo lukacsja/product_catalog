@@ -11,6 +11,7 @@
   flex-direction: column;
   padding: 32px;
   width: 100%;
+  // min-width: 212px;
   height: 440px;
   background-color: $color-surface1-grey;
 
@@ -20,6 +21,7 @@
 
   &__image {
     height: 130px;
+
     object-fit: contain;
 
     @include onTablet {
@@ -30,6 +32,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
     }
 
     &:hover {
@@ -110,6 +113,7 @@
 
   &__button {
     height: 40px;
+    min-width: 115px;
     outline: none;
     border: none;
     cursor: pointer;
